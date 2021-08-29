@@ -1,0 +1,24 @@
+h1 {
+  margin: auto;
+  margin-bottom: 2.5%;
+  width: 25%;
+  text-align: center;
+  color: orange;
+}
+
+.calc-container {
+  background-color: black;
+  border-radius: 10px;
+  width: 25%;
+  height: 468px;
+  margin: auto;
+}
+
+.display-screen {
+  background-color: gray;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  margin: auto;
+  height: 84px;
+}
