@@ -1,3 +1,5 @@
+'use strict'
+
 // add
 function add(x,y) {
   return x + y;
@@ -41,4 +43,46 @@ mainContainer.appendChild(calculatorContainer);
 // display screen
 const display = document.createElement('div');
 display.className = "display-screen";
+display.textContent = 10;
 calculatorContainer.appendChild(display);
+
+// operators
+const divisionOperator = document.createElement('div');
+divisionOperator.textContent = "/"
+divisionOperator.className = "operators";
+calculatorContainer.appendChild(divisionOperator)
+
+const multiplicationOperator = document.createElement('div');
+multiplicationOperator.textContent = "*"
+multiplicationOperator.className = "operators";
+calculatorContainer.appendChild(multiplicationOperator);
+
+const subtractionOperator = document.createElement('div');
+subtractionOperator.textContent = "-"
+subtractionOperator.className = "operators";
+calculatorContainer.appendChild(subtractionOperator)
+
+const additionOperator = document.createElement('div');
+additionOperator.textContent = "+"
+additionOperator.className = "operators";
+calculatorContainer.appendChild(additionOperator)
+
+const equalOperator = document.createElement('div');
+equalOperator.textContent = "="
+equalOperator.className = "operators";
+calculatorContainer.appendChild(equalOperator)
+// function operatorButton(parentNode, operator){
+//   parentNode.appendChild(operator)
+// }
+
+
+
+
+// function operatorsColumn(){
+//   for (let i = 0; i < 3; i++){
+//     operatorButton(calculatorContainer, operator);
+//     console.log(i);
+//   }
+
+// }
+// operatorsColumn();
