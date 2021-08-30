@@ -1,5 +1,7 @@
 'use strict'
 
+const { clear } = require('console');
+
 // add
 function add(x,y) {
   return x + y;
@@ -42,35 +44,44 @@ mainContainer.appendChild(calculatorContainer);
 
 // display screen
 const display = document.createElement('div');
-display.className = "display-screen";
+display.className = 'display-screen';
 display.textContent = 10;
 calculatorContainer.appendChild(display);
 
 // operators
+const operatorContainer = document.createElement('div');
+operatorContainer.className = 'operator-container';
+calculatorContainer.appendChild(operatorContainer);
+
 const divisionOperator = document.createElement('div');
-divisionOperator.textContent = "/"
-divisionOperator.className = "operators";
-calculatorContainer.appendChild(divisionOperator)
+divisionOperator.textContent = '/';
+divisionOperator.className = 'operators';
+operatorContainer.appendChild(divisionOperator);
 
 const multiplicationOperator = document.createElement('div');
-multiplicationOperator.textContent = "*"
-multiplicationOperator.className = "operators";
-calculatorContainer.appendChild(multiplicationOperator);
+multiplicationOperator.textContent = '*';
+multiplicationOperator.className = 'operators';
+operatorContainer.appendChild(multiplicationOperator);
 
 const subtractionOperator = document.createElement('div');
-subtractionOperator.textContent = "-"
-subtractionOperator.className = "operators";
-calculatorContainer.appendChild(subtractionOperator)
+subtractionOperator.textContent = '-';
+subtractionOperator.className = 'operators';
+operatorContainer.appendChild(subtractionOperator);
 
 const additionOperator = document.createElement('div');
-additionOperator.textContent = "+"
-additionOperator.className = "operators";
-calculatorContainer.appendChild(additionOperator)
+additionOperator.textContent = '+';
+additionOperator.className = 'operators';
+operatorContainer.appendChild(additionOperator);
 
 const equalOperator = document.createElement('div');
-equalOperator.textContent = "="
-equalOperator.className = "operators";
-calculatorContainer.appendChild(equalOperator)
+equalOperator.textContent = '=';
+equalOperator.className = 'operators';
+operatorContainer.appendChild(equalOperator);
+
+// calculator functions
+const clearFunction = document.createElement('div');
+clearFunction.textContent = 'C';
+
 // function operatorButton(parentNode, operator){
 //   parentNode.appendChild(operator)
 // }
