@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 h1 {
   margin: auto;
   margin-bottom: 2.5%;
@@ -8,16 +12,18 @@ h1 {
 
 .calc-container {
   background-color: black;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   width: 320px;
   height: 468px;
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .display-screen {
   background-color: gray;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
   width: 100%;
   margin: auto;
   height: 84px;
@@ -45,5 +51,28 @@ h1 {
   font-size: 72px;
   text-align: center;
   color: white;
-  border-radius: 5%;
+
+}
+
+.functions-container {
+  height: 75px;
+  width: 245px;
+  background-color: dodgerblue;
+  color: black;
+  margin-right: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.functions {
+  background-color: dodgerblue;
+  height: 75px;
+  width: 82px;
+  border: 1px black solid;
+  font-size: 60px;
+  text-align: center;
+  color: black;
+
 }
