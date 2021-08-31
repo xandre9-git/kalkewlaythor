@@ -1,7 +1,5 @@
 'use strict'
 
-const { clear } = require('console');
-
 // add
 function add(x,y) {
   return x + y;
@@ -48,6 +46,26 @@ display.className = 'display-screen';
 display.textContent = 10;
 calculatorContainer.appendChild(display);
 
+// calculator functions
+const functionsContainer = document.createElement('div');
+functionsContainer.className = 'functions-container';
+calculatorContainer.appendChild(functionsContainer);
+
+const clearFunction = document.createElement('div');
+clearFunction.className = 'functions';
+clearFunction.textContent = 'C';
+functionsContainer.appendChild(clearFunction);
+
+const negateFunction = document.createElement('div');
+negateFunction.className = 'functions';
+negateFunction.textContent = '+/-';
+functionsContainer.appendChild(negateFunction);
+
+const percentFunction = document.createElement('div');
+percentFunction.className = 'functions';
+percentFunction.textContent = '%';
+functionsContainer.appendChild(percentFunction);
+
 // operators
 const operatorContainer = document.createElement('div');
 operatorContainer.className = 'operator-container';
@@ -78,9 +96,7 @@ equalOperator.textContent = '=';
 equalOperator.className = 'operators';
 operatorContainer.appendChild(equalOperator);
 
-// calculator functions
-const clearFunction = document.createElement('div');
-clearFunction.textContent = 'C';
+
 
 // function operatorButton(parentNode, operator){
 //   parentNode.appendChild(operator)
