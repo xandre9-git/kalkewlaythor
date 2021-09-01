@@ -66,7 +66,7 @@ percentFunction.className = 'functions';
 percentFunction.textContent = '%';
 functionsContainer.appendChild(percentFunction);
 
-// operators
+// calculator operators
 const operatorContainer = document.createElement('div');
 operatorContainer.className = 'operator-container';
 calculatorContainer.appendChild(operatorContainer);
@@ -96,7 +96,12 @@ equalOperator.textContent = '=';
 equalOperator.className = 'operators';
 operatorContainer.appendChild(equalOperator);
 
+// calculator inputs
+const inputContainer = document.createElement('div');
+inputContainer.className = 'input-container';
+calculatorContainer.appendChild(inputContainer);
 
+const number = document.createElement('div');
 
 // function operatorButton(parentNode, operator){
 //   parentNode.appendChild(operator)
