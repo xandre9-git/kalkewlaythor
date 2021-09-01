@@ -13,7 +13,6 @@ h1 {
 
 .calc-container {
   background-color: black;
-  /* border-radius: 10px; */
   width: 320px;
   height: 468px;
   margin: auto;
@@ -23,11 +22,7 @@ h1 {
 
 .display-screen {
   background-color: rgb(245, 0, 192);
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
   width: 100%;
-  /* margin: auto; */
-  
   height: 84px;
   font-size: 72px;
   font-family: 'Helvetica';
@@ -40,11 +35,11 @@ h1 {
 .operator-container {
   height: 384px;
   width: 75px;
-  /* background-color: orange; */
   display: flex;
   flex-direction: column;
-  /* margin-left: auto; */
   order: 1;
+  position: relative;
+  bottom: 75px;
   
 }
 
@@ -52,41 +47,53 @@ h1 {
   background-color: rebeccapurple;
   height: 75px;
   width: 73px;
-  border: 1px black solid;
+  /* border: 1px black solid; */
   font-size: 72px;
   text-align: center;
   color: gold;
-  
-
 }
 
 .functions-container {
   height: 75px;
   width: 245px;
-  background-color: dodgerblue;
-
+  /* background-color: dodgerblue; */
   margin-right: 0;
   margin-bottom: auto;
   padding: 0;
   display: flex;
-  /* flex-direction: row; */
 }
 
 .functions {
   background-color: dodgerblue;
   height: 75px;
-  width: 82px;
-  border: 1px black solid;
+  width: 79px;
+  /* border: 1px black solid; */
   font-size: 60px;
   text-align: center;
   color: burlywood;
+  margin: auto;
+
 }
 
 .input-container {
-  height: 307px;
+  height: 308px;
   width: 245px;
-  background-color: tomato;
   display: flex;
   margin: 0;
-  
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-content: flex-start;
+
+}
+
+.numbers {
+  height: 75px;
+  width: 79px;
+  color: rgb(245, 0, 192);
+  background-color: greenyellow;
+  font-size: 72px;
+  font-family: Helvetica;
+  text-align: center;
+  /* border: 1px solid black; */
+  margin: auto;
 }
