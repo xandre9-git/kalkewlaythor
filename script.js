@@ -72,12 +72,12 @@ operatorContainer.className = 'operator-container';
 calculatorContainer.appendChild(operatorContainer);
 
 const divisionOperator = document.createElement('div');
-divisionOperator.textContent = '/';
+divisionOperator.textContent = '÷';
 divisionOperator.className = 'operators';
 operatorContainer.appendChild(divisionOperator);
 
 const multiplicationOperator = document.createElement('div');
-multiplicationOperator.textContent = '*';
+multiplicationOperator.textContent = '×';
 multiplicationOperator.className = 'operators';
 operatorContainer.appendChild(multiplicationOperator);
 
@@ -101,20 +101,14 @@ const inputContainer = document.createElement('div');
 inputContainer.className = 'input-container';
 calculatorContainer.appendChild(inputContainer);
 
-const number = document.createElement('div');
+function createNumber(num) {
+  const number = document.createElement('div');
+  number.className = 'numbers';
+  number.textContent = `${num}`
+  inputContainer.appendChild(number);
+}
 
-// function operatorButton(parentNode, operator){
-//   parentNode.appendChild(operator)
-// }
-
-
-
-
-// function operatorsColumn(){
-//   for (let i = 0; i < 3; i++){
-//     operatorButton(calculatorContainer, operator);
-//     console.log(i);
-//   }
-
-// }
-// operatorsColumn();
+for (let i = 9; i >= 1; i --) {
+  console.log(`Testing ${i}`)
+  createNumber(i)
+}
