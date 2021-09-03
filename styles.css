@@ -14,7 +14,7 @@ h1 {
 .calc-container {
   background-color: black;
   width: 320px;
-  height: 468px;
+  height: 459px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +33,7 @@ h1 {
 }
 
 .operator-container {
-  height: 384px;
+  height: 375px;
   width: 75px;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ h1 {
 .operators {
   background-color: rebeccapurple;
   height: 75px;
-  width: 73px;
+  width: 75px;
   /* border: 1px black solid; */
   font-size: 72px;
   text-align: center;
@@ -66,7 +66,7 @@ h1 {
 .functions {
   background-color: dodgerblue;
   height: 75px;
-  width: 79px;
+  width: 81.66px;
   /* border: 1px black solid; */
   font-size: 60px;
   text-align: center;
@@ -76,7 +76,7 @@ h1 {
 }
 
 .input-container {
-  height: 308px;
+  height: 299px;
   width: 245px;
   display: flex;
   margin: 0;
@@ -88,12 +88,12 @@ h1 {
 
 .numbers {
   height: 75px;
-  width: 79px;
+  width: 81.66px;
   color: rgb(245, 0, 192);
   background-color: greenyellow;
   font-size: 72px;
   font-family: Helvetica;
   text-align: center;
   /* border: 1px solid black; */
-  margin: auto;
+  margin: 0;
 }
