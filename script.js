@@ -101,14 +101,22 @@ const inputContainer = document.createElement('div');
 inputContainer.className = 'input-container';
 calculatorContainer.appendChild(inputContainer);
 
-function createNumber(num) {
+function createNumber(num, size) {
   const number = document.createElement('div');
   number.className = 'numbers';
-  number.textContent = `${num}`
+  number.textContent = `${num}`;
+  number.style.width = `${size}px`;
   inputContainer.appendChild(number);
 }
 
 for (let i = 9; i >= 1; i --) {
   console.log(`Testing ${i}`)
-  createNumber(i)
+  createNumber(i);
+  if (i == 1) {
+    createNumber('.', 81.66)
+    createNumber('', 81.66)
+    createNumber('0', 81.66)
+    // createNumber('  0',163.33);
+    
+  }
 }
