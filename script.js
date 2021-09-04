@@ -1,6 +1,8 @@
 'use strict'
 
+// global variables
 
+let displayData = [];
 
 // add
 function add(x,y) {
@@ -59,10 +61,20 @@ const functionsContainer = document.createElement('div');
 functionsContainer.className = 'functions-container';
 calculatorContainer.appendChild(functionsContainer);
 
-const clearFunction = document.createElement('div');
-clearFunction.className = 'functions';
-clearFunction.textContent = 'C';
-functionsContainer.appendChild(clearFunction);
+function clearFunction(parent) {
+  const clearFunction = document.createElement('div');
+  clearFunction.className = 'functions';
+  clearFunction.textContent = 'C';
+  clearFunction.id = 'clearBtn';
+  parent.appendChild(clearFunction);
+}
+
+clearFunction(functionsContainer);
+document.getElementById('clearBtn').addEventListener('click', function(){
+  display.textContent = 0;
+  displayData = [];
+});
+
 
 const negateFunction = document.createElement('div');
 negateFunction.className = 'functions';
@@ -133,9 +145,12 @@ console.log(numberBtns);
 const numbersArray = Array.from(numberBtns);
 console.log(numbersArray);
 
-numbersArray.forEach((e)=>{
+numbersArray.forEach((e) => {
   e.addEventListener("click", function(e){
-    console.log(e.target.textContent)
+    console.log(e.target.textContent);
+    displayData.push(e.target.textContent);
+    display.textContent = `${displayData.join('')}`;
+
 });
 
 });
