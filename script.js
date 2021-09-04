@@ -75,7 +75,6 @@ document.getElementById('clearBtn').addEventListener('click', function(){
   displayData = [];
 });
 
-
 const negateFunction = document.createElement('div');
 negateFunction.className = 'functions';
 negateFunction.textContent = '+/-';
@@ -109,7 +108,11 @@ operatorContainer.appendChild(subtractionOperator);
 const additionOperator = document.createElement('div');
 additionOperator.textContent = '+';
 additionOperator.className = 'operators';
+additionOperator.id = 'sumBtn';
 operatorContainer.appendChild(additionOperator);
+document.getElementById('sumBtn').addEventListener('click', function(){
+  display.textContent = '+';
+})
 
 const equalOperator = document.createElement('div');
 equalOperator.textContent = '=';
