@@ -1,5 +1,7 @@
 'use strict'
 
+
+
 // add
 function add(x,y) {
   return x + y;
@@ -25,6 +27,12 @@ function equal(fun) {
   return fun;
 }
 
+// operate
+
+function operate(func, num1, num2) {
+  return func(num1, num2);
+}
+
 // body
 const body = document.querySelector('body');
 const mainContainer = document.createElement('div');
@@ -43,7 +51,7 @@ mainContainer.appendChild(calculatorContainer);
 // display screen
 const display = document.createElement('div');
 display.className = 'display-screen';
-display.textContent = 10;
+display.textContent = 0;
 calculatorContainer.appendChild(display);
 
 // calculator functions
@@ -116,7 +124,18 @@ for (let i = 9; i >= 1; i --) {
     createNumber('.', 81.66)
     createNumber('', 81.66)
     createNumber('0', 81.66)
-    // createNumber('  0',163.33);
-    
   }
 }
+
+const numberBtns = document.querySelectorAll('.numbers');
+console.log(numberBtns);
+
+const numbersArray = Array.from(numberBtns);
+console.log(numbersArray);
+
+numbersArray.forEach((e)=>{
+  e.addEventListener("click", function(e){
+    console.log(e.target.textContent)
+});
+
+});
