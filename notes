@@ -1,0 +1,6 @@
+numbers get stored in array
+first set of numbers must be converted to one number and stored for later use as operand1
+operator gets clicked (associated func must be stored for later use)
+first operand of associated operator gets filled with first set of numbers
+second set of numbers entered and stored for use
+equate operator is selected and associated operator from step 4 is performed
