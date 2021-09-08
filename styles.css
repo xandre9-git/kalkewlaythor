@@ -30,6 +30,8 @@ h1 {
   box-sizing: border-box;
   padding: 2%;
   color: greenyellow;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .operator-container {
