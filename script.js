@@ -85,12 +85,19 @@ negateFunction.textContent = "+/-";
 negateFunction.id = "negateBtn";
 functionsContainer.appendChild(negateFunction);
 document.getElementById("negateBtn").addEventListener("click", function () {
-  display.textContent = `-${display.textContent}`;
-  let operandStr = `${displayData.join("")}`;
-  operand1 = parseFloat(operandStr);
-  operand1 = parseFloat(operand1.toPrecision(3));
-  displayData = [];
-  currentOperator = divide;
+  // if negative has not already been applied...
+  // set number as negative
+  console.log(displayData)
+  if (!(displayData.includes('-'))) {
+    display.textContent = `-${display.textContent}`;
+    displayData.push('-')
+    console.log(displayData)
+  } else {
+    
+    display.textContent = `${display.textContent}`;
+    
+    console.log(displayData);
+  }
 });
 
 const percentFunction = document.createElement("div");
@@ -181,7 +188,18 @@ document.getElementById("equalBtn").addEventListener("click", function () {
   let operandStr = `${displayData.join("")}`;
   operand2 = parseFloat(operandStr);
   operand2 = parseFloat(operand2.toPrecision(3));
-  display.textContent = operate(currentOperator, operand1, operand2);
+  console.table(operand1, operand2);
+  console.log(typeof(operand1));
+  console.log(typeof(operand2));
+  let res = operate(currentOperator, operand1, operand2).toPrecision(8);
+  console.log(res);
+  let n = parseFloat(res);
+  console.log(typeof(n));
+  console.log(n);
+  display.textContent = n;
+  if (display.textContent.length > 7) {
+    display.style.fontSize = "58px";
+  }
   displayData = [];
 });
 
