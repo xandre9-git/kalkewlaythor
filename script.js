@@ -88,22 +88,38 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   // if negative has not already been applied...
   // set number as negative
   console.log(displayData)
-  if (!(displayData.includes('-'))) {
+  if (!displayData.includes('-')) {
     display.textContent = `-${display.textContent}`;
-    displayData.push('-')
-    console.log(displayData)
+    displayData.unshift('-');
+    console.log(displayData);
   } else {
-    
-    display.textContent = `${display.textContent}`;
-    
+    displayData.shift();
+    display.textContent = `${displayData.join('')}`;
     console.log(displayData);
   }
 });
 
+// percent operation
 const percentFunction = document.createElement("div");
 percentFunction.className = "functions";
 percentFunction.textContent = "%";
+percentFunction.id = "percentBtn";
 functionsContainer.appendChild(percentFunction);
+document.getElementById("percentBtn").addEventListener("click", function () {
+  // if % has not already been applied...
+  // set number as decimal
+  console.log(displayData)
+  if (!displayData.includes('%')) {
+    display.textContent = `${display.textContent}%`;
+    displayData[displayData.length-1] = `${displayData[displayData.length-1] / 100}`; 
+    console.log(displayData);
+  } else {
+    // displayData.shift();
+    display.textContent = `${displayData.join('')}`;
+    console.log(displayData);
+  }
+});
+
 
 // calculator operators
 
@@ -135,6 +151,7 @@ multiplicationOperator.id = "multiplyBtn";
 operatorContainer.appendChild(multiplicationOperator);
 document.getElementById("multiplyBtn").addEventListener("click", function () {
   display.textContent = "×";
+  console.log(displayData);
   let operandStr = `${displayData.join("")}`;
   operand1 = parseFloat(operandStr);
   operand1 = parseFloat(operand1.toPrecision(3));
@@ -156,8 +173,6 @@ document.getElementById("differenceBtn").addEventListener("click", function () {
   displayData = [];
   currentOperator = subtract;
 });
-
-
 
 // addition operation
 const additionOperator = document.createElement("div");
@@ -200,7 +215,9 @@ document.getElementById("equalBtn").addEventListener("click", function () {
   if (display.textContent.length > 7) {
     display.style.fontSize = "58px";
   }
-  displayData = [];
+  displayData.push(n);
+  displayData.shift();
+  console.log(displayData);
 });
 
 // calculator inputs
