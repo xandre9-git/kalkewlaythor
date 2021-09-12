@@ -1,69 +1,73 @@
 "use strict";
 
-// global variables
+// GLOBALS
 
 let displayData = [];
 let operand1 = 0;
 let operand2 = 0;
 let currentOperator = null;
 
-// add
+// OPERATORS
+
+// Add Function
 function add(x, y) {
   return x + y;
 }
 
-// subtract
+// Subtract Function
 function subtract(x, y) {
   return x - y;
 }
 
-// multiply
+// Multiply Function
 function multiply(x, y) {
   return x * y;
 }
 
-// divide
+// Divide Function
 function divide(x, y) {
   return x / y;
 }
 
-// equal
+// Equal Function
 function equal(fun) {
   return fun;
 }
 
-// operate function
-
+// Operate Function
 function operate(func, num1, num2) {
   return func(num1, num2);
 }
 
-// body
+// DOM
+
+// Body
 const body = document.querySelector("body");
 const mainContainer = document.createElement("div");
 body.appendChild(mainContainer);
 
-// h1
+// Header
 const h1 = document.createElement("h1");
 h1.textContent = "Calculator";
 body.prepend(h1);
 
-// calculator container
+// Calculator Container
 const calculatorContainer = document.createElement("div");
 calculatorContainer.className = "calc-container";
 mainContainer.appendChild(calculatorContainer);
 
-// display screen
+// Calculator Display Screen
 const display = document.createElement("div");
 display.className = "display-screen";
 display.textContent = 0;
 calculatorContainer.appendChild(display);
 
-// calculator functions
+// Calculator Functions Container
 const functionsContainer = document.createElement("div");
 functionsContainer.className = "functions-container";
 calculatorContainer.appendChild(functionsContainer);
 
+// Clear Function
 function clearFunction(parent) {
   const clearFunction = document.createElement("div");
   clearFunction.className = "functions";
@@ -71,14 +75,13 @@ function clearFunction(parent) {
   clearFunction.id = "clearBtn";
   parent.appendChild(clearFunction);
 }
-
 clearFunction(functionsContainer);
 document.getElementById("clearBtn").addEventListener("click", function () {
   display.textContent = 0;
   displayData = [];
 });
 
-// negate operation
+// Negate Function
 const negateFunction = document.createElement("div");
 negateFunction.className = "functions";
 negateFunction.textContent = "+/-";
@@ -87,19 +90,19 @@ functionsContainer.appendChild(negateFunction);
 document.getElementById("negateBtn").addEventListener("click", function () {
   // if negative has not already been applied...
   // set number as negative
-  console.log(displayData)
-  if (!displayData.includes('-')) {
+  console.log(displayData);
+  if (!displayData.includes("-")) {
     display.textContent = `-${display.textContent}`;
-    displayData.unshift('-');
+    displayData.unshift("-");
     console.log(displayData);
   } else {
     displayData.shift();
-    display.textContent = `${displayData.join('')}`;
+    display.textContent = `${displayData.join("")}`;
     console.log(displayData);
   }
 });
 
-// percent operation
+// Percent Function
 const percentFunction = document.createElement("div");
 percentFunction.className = "functions";
 percentFunction.textContent = "%";
@@ -108,27 +111,28 @@ functionsContainer.appendChild(percentFunction);
 document.getElementById("percentBtn").addEventListener("click", function () {
   // if % has not already been applied...
   // set number as decimal
-  console.log(displayData)
-  if (!displayData.includes('%')) {
+  console.log(displayData);
+  if (!display.textContent.includes("%")) {
     display.textContent = `${display.textContent}%`;
-    displayData[displayData.length-1] = `${displayData[displayData.length-1] / 100}`; 
+    displayData = [`${
+      displayData.join("") / 100
+    }`];
     console.log(displayData);
   } else {
-    // displayData.shift();
-    display.textContent = `${displayData.join('')}`;
-    console.log(displayData);
+    displayData = [`${displayData.join("") * 100}`]
+    display.textContent = `${displayData.join("")}`;
+    console.log('toggle off', displayData);
   }
 });
 
+// CALCULATOR OPERATORS
 
-// calculator operators
-
-// operator container
+// Operator Container
 const operatorContainer = document.createElement("div");
 operatorContainer.className = "operator-container";
 calculatorContainer.appendChild(operatorContainer);
 
-// division operation
+// Division Operation
 const divisionOperator = document.createElement("div");
 divisionOperator.textContent = "÷";
 divisionOperator.className = "operators";
@@ -143,7 +147,7 @@ document.getElementById("divisionBtn").addEventListener("click", function () {
   currentOperator = divide;
 });
 
-// multiplication operation
+// Multiplication Operation
 const multiplicationOperator = document.createElement("div");
 multiplicationOperator.textContent = "×";
 multiplicationOperator.className = "operators";
@@ -159,7 +163,7 @@ document.getElementById("multiplyBtn").addEventListener("click", function () {
   currentOperator = multiply;
 });
 
-// subtraction operation
+// Subtraction Operation
 const subtractionOperator = document.createElement("div");
 subtractionOperator.textContent = "-";
 subtractionOperator.className = "operators";
@@ -174,7 +178,7 @@ document.getElementById("differenceBtn").addEventListener("click", function () {
   currentOperator = subtract;
 });
 
-// addition operation
+// Addition Operation
 const additionOperator = document.createElement("div");
 additionOperator.textContent = "+";
 additionOperator.className = "operators";
@@ -189,7 +193,7 @@ document.getElementById("sumBtn").addEventListener("click", function () {
   currentOperator = add;
 });
 
-// equals operation
+// Equals Operation
 function equalOperator(parent) {
   const equalFunction = document.createElement("div");
   equalFunction.className = "operators";
@@ -197,34 +201,33 @@ function equalOperator(parent) {
   equalFunction.id = "equalBtn";
   parent.appendChild(equalFunction);
 }
-
 equalOperator(operatorContainer);
 document.getElementById("equalBtn").addEventListener("click", function () {
   let operandStr = `${displayData.join("")}`;
   operand2 = parseFloat(operandStr);
   operand2 = parseFloat(operand2.toPrecision(3));
   console.table(operand1, operand2);
-  console.log(typeof(operand1));
-  console.log(typeof(operand2));
+  console.log(typeof operand1);
+  console.log(typeof operand2);
   let res = operate(currentOperator, operand1, operand2).toPrecision(8);
   console.log(res);
   let n = parseFloat(res);
-  console.log(typeof(n));
-  console.log(n);
+  console.log(typeof n);
+  console.log('this is n', n);
   display.textContent = n;
   if (display.textContent.length > 7) {
     display.style.fontSize = "58px";
   }
-  displayData.push(n);
-  displayData.shift();
+  displayData = [n];
   console.log(displayData);
 });
 
-// calculator inputs
+// CALCULATOR INPUTS
+
+// Digits Container
 const inputContainer = document.createElement("div");
 inputContainer.className = "input-container";
 calculatorContainer.appendChild(inputContainer);
-
 function createNumber(num, size) {
   const number = document.createElement("div");
   number.className = "numbers";
@@ -232,7 +235,6 @@ function createNumber(num, size) {
   number.style.width = `${size}px`;
   inputContainer.appendChild(number);
 }
-
 for (let i = 9; i >= 1; i--) {
   createNumber(i);
   if (i == 1) {
@@ -241,10 +243,8 @@ for (let i = 9; i >= 1; i--) {
     createNumber("0", 81.66);
   }
 }
-
 const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
-
 numbersArray.forEach((e) => {
   e.addEventListener("click", function (e) {
     displayData.push(e.target.textContent);
