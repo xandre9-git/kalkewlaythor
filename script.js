@@ -6,6 +6,7 @@ let displayData = [];
 let operand1 = null;
 let operand2 = null;
 let currentOperator = null;
+let n = null;
 
 // OPERATORS
 
@@ -39,7 +40,8 @@ function equal() {
   console.log(typeof operand2);
   let res = operate(currentOperator, operand1, operand2).toPrecision(8);
   console.log(res);
-  let n = parseFloat(res);
+  n = parseFloat(res);
+  n = n.toString();
   console.log(typeof n);
   console.log("this is n", n);
   display.textContent = n;
@@ -47,7 +49,10 @@ function equal() {
     display.style.fontSize = "58px";
   }
   displayData = [n];
+  operand1 = null;
+  operand2 = null;
   console.log(displayData);
+  return n;
 }
 
 // Operate Function
@@ -77,6 +82,9 @@ const display = document.createElement("div");
 display.className = "display-screen";
 display.textContent = 0;
 calculatorContainer.appendChild(display);
+
+// Display Function
+
 
 // Calculator Functions Container
 const functionsContainer = document.createElement("div");
@@ -129,13 +137,13 @@ document.getElementById("percentBtn").addEventListener("click", function () {
   // set number as decimal
   console.log(displayData);
   if (!display.textContent.includes("%")) {
-    display.textContent = `${display.textContent}%`;
+    display.textContent = `${displayData.join("") / 100}`;
     displayData = [`${displayData.join("") / 100}`];
     console.log(displayData);
-  } else {
-    displayData = [`${displayData.join("") * 100}`];
-    display.textContent = `${displayData.join("")}`;
-    console.log("toggle off", displayData);
+  // } else {
+  //   displayData = [`${displayData.join("") * 100}`];
+  //   display.textContent = `${displayData.join("")}`;
+  //   console.log("toggle off", displayData);
   }
 });
 
@@ -255,6 +263,9 @@ const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
   e.addEventListener("click", function (e) {
+    // if (n != null) {
+    //   displayData = [];
+    // }
     displayData.push(e.target.textContent);
     console.log(`${e.target.textContent} clicked.`);
     console.log(`Current items in display array: ${displayData}`);
