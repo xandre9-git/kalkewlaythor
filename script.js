@@ -84,7 +84,14 @@ display.textContent = 0;
 calculatorContainer.appendChild(display);
 
 // Display Function
-
+function displayNumbers(arr, mod) {
+  // if ( arg.length > 8) {
+  //   // display only up to 8 chars
+  //   arg.toExponential();
+  // }
+  // display.textContent = `${displayData.join("")}`;
+  mod.textContent = arr;
+}
 
 // Calculator Functions Container
 const functionsContainer = document.createElement("div");
@@ -266,14 +273,16 @@ numbersArray.forEach((e) => {
     // if (n != null) {
     //   displayData = [];
     // }
-    displayData.push(e.target.textContent);
-    console.log(`${e.target.textContent} clicked.`);
-    console.log(`Current items in display array: ${displayData}`);
+    
     if (displayData.length > 7) {
       display.style.fontSize = "60px";
     }
-    if (displayData.length <= 9) {
-      display.textContent = `${displayData.join("")}`;
+    if (displayData.length < 9) {
+      // display.textContent = `${displayData.join("")}`;
+      displayData.push(e.target.textContent);
+      console.log(`${e.target.textContent} clicked.`);
+      console.log(`Current items in display array: ${displayData}`);
+      displayNumbers(displayData.join(""), display);
     }
   });
 });
