@@ -27,39 +27,62 @@ function multiply(x, y) {
 
 // Divide Function
 function divide(x, y) {
-  return x / y;
+  if (y == 0) {
+    return "What you talkin' 'bout, Willis?";
+  } else {
+    return x / y;
+  }
 }
 
 // Equal Function
 function equal() {
-  let operandStr = `${displayData.join("")}`;
-  operand2 = parseFloat(operandStr);
-  operand2 = parseFloat(operand2.toPrecision(3));
-  console.table(operand1, operand2);
-  console.log(typeof operand1);
-  console.log(typeof operand2);
-  let res = operate(currentOperator, operand1, operand2).toPrecision(8);
-  console.log(res);
-  console.log(`res type: ${typeof(res)}`)
-  n = parseFloat(res);
-  n = n.toString();
-  
-  console.log(typeof n);
-  console.log("this is n", n);
-  display.textContent = n;
-  if (display.textContent.length > 7) {
-    display.style.fontSize = "58px";
+  if (operand1 != null) {
+    let operandStr = `${displayData.join("")}`;
+    console.log(operandStr);
+    operand2 = parseFloat(operandStr);
+    operand2 = parseFloat(operand2.toPrecision(3));
+    console.table(operand1, operand2);
+    console.log(typeof operand1);
+    console.log(typeof operand2);
+    console.log(currentOperator);
+    console.log(operate(currentOperator, operand1, operand2));
+    let res = operate(currentOperator, operand1, operand2)
+    console.log(res)
+    if (typeof res == "number") {
+      res = res.toPrecision(8);
+      console.log(res);
+      console.log(`res type: ${typeof res}`);
+      n = parseFloat(res);
+      n = n.toString();
+      if (n.length > 8) {
+        n = Number(n);
+        n = n.toExponential(5);
+      }
+      console.log(typeof n);
+      console.log("this is n", n);
+      display.textContent = n;
+      if (display.textContent.length > 7) {
+        display.style.fontSize = "58px";
+      }
+      displayData = [n];
+      operand1 = null;
+      operand2 = null;
+      console.log(displayData);
+      return n;
+    } else {
+      return display.textContent = res;
+    }
+
   }
-  displayData = [n];
-  operand1 = null;
-  operand2 = null;
-  console.log(displayData);
-  return n;
 }
 
 // Operate Function
 function operate(func, num1, num2) {
-  return func(num1, num2);
+  if (typeof func(num1, num2) == "string") {
+    return `bruh`;
+  } else {
+    return func(num1, num2);
+  }
 }
 
 // DOM
@@ -147,25 +170,24 @@ document.getElementById("percentBtn").addEventListener("click", function () {
   // set number as decimal
   console.log(displayData);
   displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
-  console.log(`After % Value: ${displayData}`)
-
+  console.log(`After % Value: ${displayData}`);
   let displayScreen = displayData[0];
   // displayScreen = Number(displayScreen)
   // console.log(typeof(displayScreen))
   displayScreen = parseFloat(displayScreen);
-  console.log(typeof(displayScreen))
-  console.log(displayScreen)
+  console.log(typeof displayScreen);
+  console.log(displayScreen);
   displayData[0] = displayScreen;
 
   if (displayScreen.length > 9) {
-    console.log(`Length of displayScreen: ${displayScreen.length}`)
+    console.log(`Length of displayScreen: ${displayScreen.length}`);
     // console.log('length of display screen',displayScreen.length)
     displayScreen = displayScreen.toString();
-    displayScreen = Number(displayScreen)
+    displayScreen = Number(displayScreen);
     displayData = [displayScreen.toExponential()];
-    console.log(displayData)
+    console.log(displayData);
     display.style.fontSize = "58px";
-    
+
     displayNumbers(displayData, display);
   } else {
     // display.textContent = `${displayData.join("") / 100}`;
