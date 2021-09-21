@@ -36,9 +36,10 @@ function divide(x, y) {
 
 // Equal Function
 function equal() {
-  if (operand1 != null) {
+  console.log(`Equal() displayData values: ${displayData}`)
+  if (operand1 != null && displayData.length > 0) {
     let operandStr = `${displayData.join("")}`;
-    console.log(operandStr);
+    console.log(`operandStr value: ${operandStr}`);
     operand2 = parseFloat(operandStr);
     operand2 = parseFloat(operand2.toPrecision(3));
     console.table(operand1, operand2);
@@ -79,7 +80,7 @@ function equal() {
 // Operate Function
 function operate(func, num1, num2) {
   if (typeof func(num1, num2) == "string") {
-    return `bruh`;
+    return `Error`;
   } else {
     return func(num1, num2);
   }
@@ -211,15 +212,20 @@ divisionOperator.className = "operators";
 divisionOperator.id = "divisionBtn";
 operatorContainer.appendChild(divisionOperator);
 document.getElementById("divisionBtn").addEventListener("click", function () {
+  currentOperator = divide;
   if (operand1 != null) {
     equal();
   }
-  displayNumbers(displayData.join(""), display);
-  let operandStr = `${displayData.join("")}`;
-  operand1 = parseFloat(operandStr);
-  operand1 = parseFloat(operand1.toPrecision(3));
-  displayData = [];
-  currentOperator = divide;
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    operand1 = parseFloat(operand1.toPrecision(3));
+    console.log(`Operand1 value: ${operand1}`)
+    displayData = [];
+
+  }
+
 });
 
 // Multiplication Operation
@@ -229,15 +235,21 @@ multiplicationOperator.className = "operators";
 multiplicationOperator.id = "multiplyBtn";
 operatorContainer.appendChild(multiplicationOperator);
 document.getElementById("multiplyBtn").addEventListener("click", function () {
+  currentOperator = multiply;
   if (operand1 != null) {
     equal();
+    console.log(`Equal() fired.`);
   }
-  displayNumbers(displayData.join(""), display);
+  console.log(`× clicked.`)
+  console.log(displayData.length)
+  if (displayData.length > 0){
+    displayNumbers(displayData.join(""), display);
   let operandStr = `${displayData.join("")}`;
   operand1 = parseFloat(operandStr);
   operand1 = parseFloat(operand1.toPrecision(3));
   displayData = [];
-  currentOperator = multiply;
+
+  }
 });
 
 // Subtraction Operation
@@ -248,15 +260,19 @@ subtractionOperator.id = "differenceBtn";
 operatorContainer.appendChild(subtractionOperator);
 document.getElementById("differenceBtn").addEventListener("click", function () {
   console.log(`Operand 1's value: ${operand1}`);
+  currentOperator = subtract;
   if (operand1 != null) {
     equal();
   }
-  displayNumbers(displayData.join(""), display);
-  let operandStr = `${displayData.join("")}`;
-  operand1 = parseFloat(operandStr);
-  operand1 = parseFloat(operand1.toPrecision(3));
-  displayData = [];
-  currentOperator = subtract;
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    operand1 = parseFloat(operand1.toPrecision(3));
+    displayData = [];
+
+  }
+
 });
 
 // Addition Operation
@@ -266,15 +282,19 @@ additionOperator.className = "operators";
 additionOperator.id = "sumBtn";
 operatorContainer.appendChild(additionOperator);
 document.getElementById("sumBtn").addEventListener("click", function () {
+  currentOperator = add;
   if (operand1 != null) {
     equal();
   }
-  displayNumbers(displayData.join(""), display);
-  let operandStr = `${displayData.join("")}`;
-  operand1 = parseFloat(operandStr);
-  operand1 = parseFloat(operand1.toPrecision(3));
-  displayData = [];
-  currentOperator = add;
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    operand1 = parseFloat(operand1.toPrecision(3));
+    displayData = [];
+
+  }
+
 });
 
 // Equals Operation
@@ -309,6 +329,8 @@ for (let i = 9; i >= 1; i--) {
     createNumber("0", 81.66);
   }
 }
+
+// Digits Input
 const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
@@ -322,10 +344,23 @@ numbersArray.forEach((e) => {
       display.style.fontSize = "60px";
     }
     if (displayData.length < 9) {
+      if (!displayData.includes('.')) {
       displayData.push(e.target.textContent);
       console.log(`${e.target.textContent} clicked.`);
       console.log(`Current items in display array: ${displayData}`);
       displayNumbers(displayData.join(""), display);
+      }
+      if (displayData.includes('.') && e.target.textContent != '.'){
+        displayData.push(e.target.textContent);
+        console.log(`${e.target.textContent} clicked.`);
+        console.log(`Current items in display array: ${displayData}`);
+        displayNumbers(displayData.join(""), display);
+      }
     }
+
+    //
+    // if (!displayData.includes('.')) {
+
+    // }
   });
 });
