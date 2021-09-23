@@ -57,7 +57,7 @@ function equal() {
       n = n.toString();
       if (n.length > 9) {
         n = Number(n);
-        n = n.toExponential(5);
+        n = n.toExponential(2);
       }
       console.log(typeof n);
       console.log("this is n", n);
@@ -211,10 +211,11 @@ divisionOperator.className = "operators";
 divisionOperator.id = "divisionBtn";
 operatorContainer.appendChild(divisionOperator);
 document.getElementById("divisionBtn").addEventListener("click", function () {
-  currentOperator = divide;
+  
   if (operand1 != null) {
     equal();
   }
+  currentOperator = divide;
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -232,11 +233,12 @@ multiplicationOperator.className = "operators";
 multiplicationOperator.id = "multiplyBtn";
 operatorContainer.appendChild(multiplicationOperator);
 document.getElementById("multiplyBtn").addEventListener("click", function () {
-  currentOperator = multiply;
+  
   if (operand1 != null) {
     equal();
     console.log(`Equal() fired.`);
   }
+  currentOperator = multiply;
   console.log(`× clicked.`);
   console.log(displayData.length);
   if (displayData.length > 0) {
@@ -256,10 +258,12 @@ subtractionOperator.id = "differenceBtn";
 operatorContainer.appendChild(subtractionOperator);
 document.getElementById("differenceBtn").addEventListener("click", function () {
   console.log(`Operand 1's value: ${operand1}`);
-  currentOperator = subtract;
+ 
   if (operand1 != null) {
     equal();
   }
+
+  currentOperator = subtract;
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -276,10 +280,12 @@ additionOperator.className = "operators";
 additionOperator.id = "sumBtn";
 operatorContainer.appendChild(additionOperator);
 document.getElementById("sumBtn").addEventListener("click", function () {
-  currentOperator = add;
+  
   if (operand1 != null) {
     equal();
   }
+
+  currentOperator = add;
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
