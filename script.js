@@ -36,7 +36,7 @@ function divide(x, y) {
 
 // Equal Function
 function equal() {
-  console.log(`Equal() displayData values: ${displayData}`)
+  console.log(`Equal() displayData values: ${displayData}`);
   if (operand1 != null && displayData.length > 0) {
     let operandStr = `${displayData.join("")}`;
     console.log(`operandStr value: ${operandStr}`);
@@ -47,23 +47,23 @@ function equal() {
     console.log(typeof operand2);
     console.log(currentOperator);
     console.log(operate(currentOperator, operand1, operand2));
-    let res = operate(currentOperator, operand1, operand2)
-    console.log(res)
+    let res = operate(currentOperator, operand1, operand2);
+    console.log(res);
     if (typeof res == "number") {
       res = res.toPrecision(8);
       console.log(res);
       console.log(`res type: ${typeof res}`);
       n = parseFloat(res);
       n = n.toString();
-      if (n.length > 8) {
+      if (n.length > 9) {
         n = Number(n);
         n = n.toExponential(5);
       }
       console.log(typeof n);
       console.log("this is n", n);
       display.textContent = n;
-      if (display.textContent.length > 7) {
-        display.style.fontSize = "58px";
+      if (display.textContent.length > 8) {
+        display.style.fontSize = "64px";
       }
       displayData = [n];
       operand1 = null;
@@ -71,9 +71,8 @@ function equal() {
       console.log(displayData);
       return n;
     } else {
-      return display.textContent = res;
+      return (display.textContent = res);
     }
-
   }
 }
 
@@ -221,11 +220,9 @@ document.getElementById("divisionBtn").addEventListener("click", function () {
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
     operand1 = parseFloat(operand1.toPrecision(3));
-    console.log(`Operand1 value: ${operand1}`)
+    console.log(`Operand1 value: ${operand1}`);
     displayData = [];
-
   }
-
 });
 
 // Multiplication Operation
@@ -240,15 +237,14 @@ document.getElementById("multiplyBtn").addEventListener("click", function () {
     equal();
     console.log(`Equal() fired.`);
   }
-  console.log(`× clicked.`)
-  console.log(displayData.length)
-  if (displayData.length > 0){
+  console.log(`× clicked.`);
+  console.log(displayData.length);
+  if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
-  let operandStr = `${displayData.join("")}`;
-  operand1 = parseFloat(operandStr);
-  operand1 = parseFloat(operand1.toPrecision(3));
-  displayData = [];
-
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    operand1 = parseFloat(operand1.toPrecision(3));
+    displayData = [];
   }
 });
 
@@ -270,9 +266,7 @@ document.getElementById("differenceBtn").addEventListener("click", function () {
     operand1 = parseFloat(operandStr);
     operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
-
   }
-
 });
 
 // Addition Operation
@@ -292,9 +286,7 @@ document.getElementById("sumBtn").addEventListener("click", function () {
     operand1 = parseFloat(operandStr);
     operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
-
   }
-
 });
 
 // Equals Operation
@@ -344,23 +336,36 @@ numbersArray.forEach((e) => {
       display.style.fontSize = "60px";
     }
     if (displayData.length < 9) {
-      if (!displayData.includes('.')) {
-      displayData.push(e.target.textContent);
-      console.log(`${e.target.textContent} clicked.`);
-      console.log(`Current items in display array: ${displayData}`);
-      displayNumbers(displayData.join(""), display);
-      }
-      if (displayData.includes('.') && e.target.textContent != '.'){
+      if (displayData[0] != 0 && !displayData.includes(".")) {
+      // if (displayData[0] != 0) {
+        displayData.push(e.target.textContent);
+        console.log(`${e.target.textContent} clicked.`);
+        console.log(`Current items in display array: ${displayData}`);
+        displayNumbers(displayData.join(""), display);
+      
+      } if (displayData[0] == 0 && e.target.textContent == '.') {
+        console.log('deez')
+        displayData.push(e.target.textContent);
+        displayNumbers(displayData.join(""), display);
+      } 
+
+      if (displayData[0] == 0 && e.target.textContent != 0){
+        console.log('cheetos');
+        displayData.pop();
+        displayData.push(e.target.textContent);
+        displayNumbers(displayData.join(""), display);
+      } 
+
+      if (displayData.includes(".") && e.target.textContent != ".") {
         displayData.push(e.target.textContent);
         console.log(`${e.target.textContent} clicked.`);
         console.log(`Current items in display array: ${displayData}`);
         displayNumbers(displayData.join(""), display);
       }
+
+      console.log(`JavaScript is a fun programming language.`);
+
     }
 
-    //
-    // if (!displayData.includes('.')) {
-
-    // }
   });
 });
