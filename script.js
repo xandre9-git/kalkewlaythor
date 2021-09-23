@@ -349,14 +349,17 @@ numbersArray.forEach((e) => {
         displayNumbers(displayData.join(""), display);
       } 
 
-      if (displayData[0] == 0 && e.target.textContent != 0){
+      else if (displayData[0] == 0 && e.target.textContent != 0){
         console.log('cheetos');
-        displayData.pop();
+        if (displayData[1] != '.') {
+          displayData.pop();
+        }
+        
         displayData.push(e.target.textContent);
         displayNumbers(displayData.join(""), display);
       } 
 
-      if (displayData.includes(".") && e.target.textContent != ".") {
+      else if (displayData.includes(".") && e.target.textContent != ".") {
         displayData.push(e.target.textContent);
         console.log(`${e.target.textContent} clicked.`);
         console.log(`Current items in display array: ${displayData}`);
