@@ -63,7 +63,7 @@ function equal() {
       console.log("this is n", n);
       display.textContent = n;
       if (display.textContent.length > 8) {
-        display.style.fontSize = "64px";
+        display.style.fontSize = "65px";
       }
       displayData = [n];
       operand1 = null;
@@ -79,7 +79,7 @@ function equal() {
 // Operate Function
 function operate(func, num1, num2) {
   if (typeof func(num1, num2) == "string") {
-    return `Error`;
+    return `bruh`;
   } else {
     return func(num1, num2);
   }
@@ -339,7 +339,7 @@ numbersArray.forEach((e) => {
     }
 
     if (displayData.length > 7) {
-      display.style.fontSize = "60px";
+      display.style.fontSize = "65px";
     }
     if (displayData.length < 9) {
       if (displayData[0] != 0 && !displayData.includes(".")) {
@@ -373,7 +373,10 @@ numbersArray.forEach((e) => {
       }
 
       console.log(`JavaScript is a fun programming language.`);
-
+      if (displayData[0] == '.'){
+        displayData.unshift(0);
+        displayNumbers(displayData.join(""), display);
+      }
     }
 
   });
