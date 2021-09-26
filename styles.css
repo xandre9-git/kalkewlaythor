@@ -5,14 +5,15 @@
 h1 {
   margin: auto;
   margin-bottom: 2.5%;
-  width: 25%;
+  width: 50%;
   text-align: center;
-  color: rgb(255, 123, 0);
-  font-size: 50px;
+  color: #545454;
+  font-size: 84px;
 }
 
 .calc-container {
   background-color: black;
+  border: .5em solid black;
   width: 320px;
   height: 459px;
   margin: auto;
@@ -21,14 +22,14 @@ h1 {
 }
 
 .display-screen {
-  background-color: rgb(245, 0, 192);
+  background-color: #9bbc0f;
   width: 100%;
   height: 84px;
   font-size: 72px;
   font-family: 'Helvetica';
   box-sizing: border-box;
   padding: 2%;
-  color: greenyellow;
+  color: #0f380f;
   display: flex;
   justify-content: flex-end;
 }
@@ -45,13 +46,13 @@ h1 {
 }
 
 .operators {
-  background-color: rebeccapurple;
+  background-color: #545454;
   height: 75px;
   width: 75px;
   /* border: 1px black solid; */
   font-size: 72px;
   text-align: center;
-  color: gold;
+  color: 	#a9a9a9;
 }
 
 .functions-container {
@@ -65,13 +66,13 @@ h1 {
 }
 
 .functions {
-  background-color: dodgerblue;
+  background-color:	black;
   height: 75px;
   width: 81.66px;
   /* border: 1px black solid; */
   font-size: 60px;
   text-align: center;
-  color: burlywood;
+  color:  #bebebe;
   margin: auto;
 
 }
@@ -90,8 +91,8 @@ h1 {
 .numbers {
   height: 75px;
   width: 81.66px;
-  color: rgb(245, 0, 192);
-  background-color: greenyellow;
+  color: black;
+  background-color: #a9a9a9;
   font-size: 72px;
   font-family: Helvetica;
   text-align: center;
