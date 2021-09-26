@@ -134,7 +134,7 @@ function clearFunction(parent) {
 clearFunction(functionsContainer);
 document.getElementById("clearBtn").addEventListener("click", function () {
   display.textContent = 0;
-  displayData = [];
+  displayData = [0];
   n = null;
 });
 
@@ -153,7 +153,7 @@ document.getElementById("negateBtn").addEventListener("click", function () {
     displayData.unshift("-");
     console.log(displayData);
   } else {
-    displayData.shift();
+    displayData.shift("-");
     display.textContent = `${displayData.join("")}`;
     console.log(displayData);
   }
@@ -169,32 +169,35 @@ document.getElementById("percentBtn").addEventListener("click", function () {
   // if % has not already been applied...
   // set number as decimal
   console.log(displayData);
-  displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
-  console.log(`After % Value: ${displayData}`);
-  let displayScreen = displayData[0];
-  // displayScreen = Number(displayScreen)
-  // console.log(typeof(displayScreen))
-  displayScreen = parseFloat(displayScreen);
-  console.log(typeof displayScreen);
-  console.log(displayScreen);
-  displayData[0] = displayScreen;
-
-  if (displayScreen.length > 9) {
-    console.log(`Length of displayScreen: ${displayScreen.length}`);
-    // console.log('length of display screen',displayScreen.length)
-    displayScreen = displayScreen.toString();
-    displayScreen = Number(displayScreen);
-    displayData = [displayScreen.toExponential()];
+  if (displayData.includes('/^\d+$/')){
+    displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
+    console.log(`After % Value: ${displayData}`);
+    let displayScreen = displayData[0];
+    // displayScreen = Number(displayScreen)
+    // console.log(typeof(displayScreen))
+    displayScreen = parseFloat(displayScreen);
+    console.log(typeof displayScreen);
+    console.log(displayScreen);
+    displayData[0] = displayScreen;
+  
+    if (displayScreen.length > 9) {
+      console.log(`Length of displayScreen: ${displayScreen.length}`);
+      // console.log('length of display screen',displayScreen.length)
+      displayScreen = displayScreen.toString();
+      displayScreen = Number(displayScreen);
+      displayData = [displayScreen.toExponential()];
+      console.log(displayData);
+      display.style.fontSize = "65px";
+  
+      displayNumbers(displayData, display);
+    } else {
+      // display.textContent = `${displayData.join("") / 100}`;
+      displayNumbers(displayData, display);
+    }
+  
     console.log(displayData);
-    display.style.fontSize = "58px";
-
-    displayNumbers(displayData, display);
-  } else {
-    // display.textContent = `${displayData.join("") / 100}`;
-    displayNumbers(displayData, display);
   }
-
-  console.log(displayData);
+  
 });
 
 // CALCULATOR OPERATORS
