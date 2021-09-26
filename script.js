@@ -7,6 +7,7 @@ let operand1 = null;
 let operand2 = null;
 let currentOperator = null;
 let n = null;
+let operatorStyles = document.getElementsByClassName('operators');
 
 // OPERATORS
 
@@ -36,6 +37,10 @@ function divide(x, y) {
 
 // Equal Function
 function equal() {
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
   console.log(`Equal() displayData values: ${displayData}`);
   if (operand1 != null && displayData.length > 0) {
     let operandStr = `${displayData.join("")}`;
@@ -202,7 +207,7 @@ document.getElementById("percentBtn").addEventListener("click", function () {
 
 // CALCULATOR OPERATORS
 
-// Operator Container
+// Math Operators Container
 const operatorContainer = document.createElement("div");
 operatorContainer.className = "operator-container";
 calculatorContainer.appendChild(operatorContainer);
@@ -218,7 +223,17 @@ document.getElementById("divisionBtn").addEventListener("click", function () {
   if (operand1 != null) {
     equal();
   }
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
   currentOperator = divide;
+  // divisionOperator.style.color = '#545454';
+  // divisionOperator.style.backgroundColor = '#a9a9a9';
+  operatorStyles[0].style.color = '#545454';
+  operatorStyles[0].style.backgroundColor = '#a9a9a9';
+
+
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -241,7 +256,13 @@ document.getElementById("multiplyBtn").addEventListener("click", function () {
     equal();
     console.log(`Equal() fired.`);
   }
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
   currentOperator = multiply;
+  operatorStyles[1].style.color = '#545454';
+  operatorStyles[1].style.backgroundColor = '#a9a9a9';
   console.log(`× clicked.`);
   console.log(displayData.length);
   if (displayData.length > 0) {
@@ -265,8 +286,14 @@ document.getElementById("differenceBtn").addEventListener("click", function () {
   if (operand1 != null) {
     equal();
   }
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
 
   currentOperator = subtract;
+  subtractionOperator.style.color = '#545454';
+  subtractionOperator.style.backgroundColor = '#a9a9a9';
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -287,8 +314,14 @@ document.getElementById("sumBtn").addEventListener("click", function () {
   if (operand1 != null) {
     equal();
   }
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
 
   currentOperator = add;
+  additionOperator.style.color = '#545454';
+  additionOperator.style.backgroundColor = '#a9a9a9';
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
