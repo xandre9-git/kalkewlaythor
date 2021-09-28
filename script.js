@@ -207,13 +207,15 @@ document.getElementById("percentBtn").addEventListener("click", function () {
     console.log(typeof displayScreen);
     console.log(displayScreen);
     displayData[0] = displayScreen;
+
+    displayScreen = displayScreen.toString();
   
-    if (displayScreen.length > 9) {
+    if (displayScreen.length > 8) {
       console.log(`Length of displayScreen: ${displayScreen.length}`);
       // console.log('length of display screen',displayScreen.length)
       displayScreen = displayScreen.toString();
       displayScreen = Number(displayScreen);
-      displayData = [displayScreen.toExponential()];
+      displayData = [displayScreen.toExponential(2)];
       console.log(displayData);
       display.style.fontSize = "65px";
   
