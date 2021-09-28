@@ -138,6 +138,11 @@ function clearFunction(parent) {
 }
 clearFunction(functionsContainer);
 document.getElementById("clearBtn").addEventListener("click", function () {
+  for (let i=0; i < operatorStyles.length; i++){
+    operatorStyles[i].style.color = '#a9a9a9';
+    operatorStyles[i].style.backgroundColor = '#545454';
+  }
+  
   display.textContent = 0;
   displayData = [0];
   n = null;
@@ -153,15 +158,33 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   // if negative has not already been applied...
   // set number as negative
   console.log(displayData);
-  if (!displayData.includes("-")) {
-    display.textContent = `-${display.textContent}`;
-    displayData.unshift("-");
-    console.log(displayData);
-  } else {
+  
+
+
+  if (displayData[0] != "-") {
+    if (n != null && n.indexOf("-") != -1) {
+      displayData[0] = displayData[0] * -1;
+      display.textContent = `${displayData.join("")}`;
+    } else if (n > 0 || n == null) {
+      displayData.unshift("-");
+      display.textContent = `-${display.textContent}`;
+      console.log(displayData);
+    }
+    
+    
+  } 
+   else if (displayData[0] == '-'){
     displayData.shift("-");
     display.textContent = `${displayData.join("")}`;
     console.log(displayData);
   }
+
+  // if (n != null && n.indexOf("-") != -1){
+  //   console.log(`n's negative: ${n}`);
+  //   console.log(displayData[0]);
+  //   displayData[0] = displayData[0] * -1;
+  //   display.textContent = displayData[0]
+  // }
 });
 
 // Percent Function
@@ -174,7 +197,7 @@ document.getElementById("percentBtn").addEventListener("click", function () {
   // if % has not already been applied...
   // set number as decimal
   console.log(displayData);
-  if (displayData.includes('/^\d+$/')){
+  if (displayData){
     displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
     console.log(`After % Value: ${displayData}`);
     let displayScreen = displayData[0];
