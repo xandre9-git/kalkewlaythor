@@ -68,7 +68,7 @@ function equal() {
       console.log("this is n", n);
       display.textContent = n;
       if (display.textContent.length > 8) {
-        display.style.fontSize = "65px";
+        display.style.fontSize = "62px";
       }
       displayData = [n];
       operand1 = null;
@@ -158,6 +158,11 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   // if negative has not already been applied...
   // set number as negative
   console.log(displayData);
+
+  if (displayData.length == 0){
+    console.log(`Deez`);
+    displayData[0] = 0;
+  }
   
 
 
@@ -217,7 +222,7 @@ document.getElementById("percentBtn").addEventListener("click", function () {
       displayScreen = Number(displayScreen);
       displayData = [displayScreen.toExponential(2)];
       console.log(displayData);
-      display.style.fontSize = "65px";
+      display.style.fontSize = "62px";
   
       displayNumbers(displayData, display);
     } else {
@@ -399,9 +404,13 @@ numbersArray.forEach((e) => {
       n = null;
     }
 
-    if (displayData.length > 7) {
-      display.style.fontSize = "65px";
-    }
+    // if (displayData.length == 0){
+    //   display.style.fontSize = "72px";
+    // }
+
+    // if (displayData.length > 7) {
+    //   display.style.fontSize = "62px";
+    // }
     if (displayData.length < 9) {
       if (displayData[0] != 0 && !displayData.includes(".")) {
       // if (displayData[0] != 0) {
