@@ -8,6 +8,7 @@ let operand2 = null;
 let currentOperator = null;
 let n = null;
 let operatorStyles = document.getElementsByClassName('operators');
+let functionStyles = document.getElementsByClassName('functions');
 
 // OPERATORS
 
@@ -142,10 +143,17 @@ document.getElementById("clearBtn").addEventListener("click", function () {
     operatorStyles[i].style.color = '#a9a9a9';
     operatorStyles[i].style.backgroundColor = '#545454';
   }
+
+  // functionStyles[0].style.transition = 'color 2s 1s';
+  // functionStyles[0].style.backgroundColor = 'white';
   
   display.textContent = 0;
   displayData = [0];
   n = null;
+
+  // functionStyles[0].style.color = 'white';
+  // functionStyles[0].style.backgroundColor = 'black';
+
 });
 
 // Negate Function
@@ -159,6 +167,12 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   // set number as negative
   console.log(displayData);
 
+  if (displayData.length >= 9) {
+    display.style.fontSize = '58px';
+  } else {
+    display.style.fontSize = '62px';
+  }
+
   if (displayData.length == 0){
     console.log(`Deez`);
     displayData[0] = 0;
@@ -169,6 +183,7 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   if (displayData[0] != "-") {
     if (n != null && n.indexOf("-") != -1) {
       displayData[0] = displayData[0] * -1;
+      displayData[0] = displayData[0].toExponential(2);
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
@@ -190,6 +205,8 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   //   displayData[0] = displayData[0] * -1;
   //   display.textContent = displayData[0]
   // }
+
+
 });
 
 // Percent Function
@@ -411,7 +428,14 @@ numbersArray.forEach((e) => {
     // if (displayData.length > 7) {
     //   display.style.fontSize = "62px";
     // }
-    if (displayData.length < 9) {
+    // if ((displayData[0] == 0 || displayData[0] == '-') && (e.target.textContent != '.')) {
+    //   console.log(`Don't execute rest of this function`)
+    // }
+
+    else if (displayData.length < 9) {
+
+     
+
       if (displayData[0] != 0 && !displayData.includes(".")) {
       // if (displayData[0] != 0) {
         displayData.push(e.target.textContent);
@@ -448,6 +472,8 @@ numbersArray.forEach((e) => {
         displayNumbers(displayData.join(""), display);
       }
     }
+
+    
 
   });
 });
