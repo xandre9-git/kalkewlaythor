@@ -85,6 +85,12 @@ h1 {
 
 }
 
+.functions:active{
+
+  background-color: white;
+  color: black;
+}
+
 .input-container {
   height: 299px;
   width: 245px;
@@ -106,4 +112,11 @@ h1 {
   text-align: center;
   /* border: 1px solid black; */
   margin: 0;
+  transition: color 0.125s ease-out;
 }
+
+.numbers:active {
+  color: white;
+}
+
+
