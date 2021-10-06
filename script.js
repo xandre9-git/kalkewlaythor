@@ -2,13 +2,13 @@
 
 // GLOBALS
 
-let displayData = [];
+let displayData = ["0"];
 let operand1 = null;
 let operand2 = null;
 let currentOperator = null;
 let n = null;
-let operatorStyles = document.getElementsByClassName('operators');
-let functionStyles = document.getElementsByClassName('functions');
+let operatorStyles = document.getElementsByClassName("operators");
+let functionStyles = document.getElementsByClassName("functions");
 
 // OPERATORS
 
@@ -38,11 +38,13 @@ function divide(x, y) {
 
 // Equal Function
 function equal() {
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
+
   console.log(`Equal() displayData values: ${displayData}`);
+
   if (operand1 != null && displayData.length > 0) {
     let operandStr = `${displayData.join("")}`;
     console.log(`operandStr value: ${operandStr}`);
@@ -55,22 +57,27 @@ function equal() {
     console.log(operate(currentOperator, operand1, operand2));
     let res = operate(currentOperator, operand1, operand2);
     console.log(res);
+
     if (typeof res == "number") {
       res = res.toPrecision(8);
       console.log(res);
       console.log(`res type: ${typeof res}`);
       n = parseFloat(res);
       n = n.toString();
+
       if (n.length > 9) {
         n = Number(n);
         n = n.toExponential(2);
       }
+
       console.log(typeof n);
       console.log("this is n", n);
       display.textContent = n;
+
       if (display.textContent.length > 8) {
         display.style.fontSize = "62px";
       }
+
       displayData = [n];
       operand1 = null;
       operand2 = null;
@@ -139,21 +146,20 @@ function clearFunction(parent) {
 }
 clearFunction(functionsContainer);
 document.getElementById("clearBtn").addEventListener("click", function () {
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
 
   // functionStyles[0].style.transition = 'color 2s 1s';
   // functionStyles[0].style.backgroundColor = 'white';
-  
+
   display.textContent = 0;
   displayData = [0];
   n = null;
 
   // functionStyles[0].style.color = 'white';
   // functionStyles[0].style.backgroundColor = 'black';
-
 });
 
 // Negate Function
@@ -168,33 +174,34 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   console.log(displayData);
 
   if (displayData.length >= 9) {
-    display.style.fontSize = '58px';
+    display.style.fontSize = "58px";
   } else {
-    display.style.fontSize = '62px';
+    display.style.fontSize = "62px";
   }
 
-  if (displayData.length == 0){
+  if (displayData.length == 0) {
     console.log(`Deez`);
     displayData[0] = 0;
   }
-  
-
 
   if (displayData[0] != "-") {
     if (n != null && n.indexOf("-") != -1) {
       displayData[0] = displayData[0] * -1;
-      displayData[0] = displayData[0].toExponential(2);
+      let numLength = displayData[0].toString();
+      console.log(numLength);
+      console.log(`Length of numTest: ${numLength.length}`);
+      if (numLength > 8) {
+        displayData[0] = displayData[0].toExponential(2);
+      }
+
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
       display.textContent = `-${display.textContent}`;
       console.log(displayData);
     }
-    
-    
-  } 
-   else if (displayData[0] == '-'){
-    displayData.shift("-");
+  } else if (displayData[0] == "-") {
+    displayData.shift();
     display.textContent = `${displayData.join("")}`;
     console.log(displayData);
   }
@@ -205,8 +212,6 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   //   displayData[0] = displayData[0] * -1;
   //   display.textContent = displayData[0]
   // }
-
-
 });
 
 // Percent Function
@@ -219,7 +224,7 @@ document.getElementById("percentBtn").addEventListener("click", function () {
   // if % has not already been applied...
   // set number as decimal
   console.log(displayData);
-  if (displayData){
+  if (displayData) {
     displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
     console.log(`After % Value: ${displayData}`);
     let displayScreen = displayData[0];
@@ -231,7 +236,7 @@ document.getElementById("percentBtn").addEventListener("click", function () {
     displayData[0] = displayScreen;
 
     displayScreen = displayScreen.toString();
-  
+
     if (displayScreen.length > 8) {
       console.log(`Length of displayScreen: ${displayScreen.length}`);
       // console.log('length of display screen',displayScreen.length)
@@ -240,16 +245,15 @@ document.getElementById("percentBtn").addEventListener("click", function () {
       displayData = [displayScreen.toExponential(2)];
       console.log(displayData);
       display.style.fontSize = "62px";
-  
+
       displayNumbers(displayData, display);
     } else {
       // display.textContent = `${displayData.join("") / 100}`;
       displayNumbers(displayData, display);
     }
-  
+
     console.log(displayData);
   }
-  
 });
 
 // CALCULATOR OPERATORS
@@ -266,20 +270,18 @@ divisionOperator.className = "operators";
 divisionOperator.id = "divisionBtn";
 operatorContainer.appendChild(divisionOperator);
 document.getElementById("divisionBtn").addEventListener("click", function () {
-  
   if (operand1 != null) {
     equal();
   }
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
   currentOperator = divide;
   // divisionOperator.style.color = '#545454';
   // divisionOperator.style.backgroundColor = '#a9a9a9';
-  operatorStyles[0].style.color = '#545454';
-  operatorStyles[0].style.backgroundColor = '#a9a9a9';
-
+  operatorStyles[0].style.color = "#545454";
+  operatorStyles[0].style.backgroundColor = "#a9a9a9";
 
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
@@ -298,18 +300,17 @@ multiplicationOperator.className = "operators";
 multiplicationOperator.id = "multiplyBtn";
 operatorContainer.appendChild(multiplicationOperator);
 document.getElementById("multiplyBtn").addEventListener("click", function () {
-  
   if (operand1 != null) {
     equal();
     console.log(`Equal() fired.`);
   }
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
   currentOperator = multiply;
-  operatorStyles[1].style.color = '#545454';
-  operatorStyles[1].style.backgroundColor = '#a9a9a9';
+  operatorStyles[1].style.color = "#545454";
+  operatorStyles[1].style.backgroundColor = "#a9a9a9";
   console.log(`× clicked.`);
   console.log(displayData.length);
   if (displayData.length > 0) {
@@ -329,18 +330,18 @@ subtractionOperator.id = "differenceBtn";
 operatorContainer.appendChild(subtractionOperator);
 document.getElementById("differenceBtn").addEventListener("click", function () {
   console.log(`Operand 1's value: ${operand1}`);
- 
+
   if (operand1 != null) {
     equal();
   }
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
 
   currentOperator = subtract;
-  subtractionOperator.style.color = '#545454';
-  subtractionOperator.style.backgroundColor = '#a9a9a9';
+  subtractionOperator.style.color = "#545454";
+  subtractionOperator.style.backgroundColor = "#a9a9a9";
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -357,18 +358,17 @@ additionOperator.className = "operators";
 additionOperator.id = "sumBtn";
 operatorContainer.appendChild(additionOperator);
 document.getElementById("sumBtn").addEventListener("click", function () {
-  
   if (operand1 != null) {
     equal();
   }
-  for (let i=0; i < operatorStyles.length; i++){
-    operatorStyles[i].style.color = '#a9a9a9';
-    operatorStyles[i].style.backgroundColor = '#545454';
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
   }
 
   currentOperator = add;
-  additionOperator.style.color = '#545454';
-  additionOperator.style.backgroundColor = '#a9a9a9';
+  additionOperator.style.color = "#545454";
+  additionOperator.style.backgroundColor = "#a9a9a9";
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
@@ -421,59 +421,51 @@ numbersArray.forEach((e) => {
       n = null;
     }
 
-    // if (displayData.length == 0){
-    //   display.style.fontSize = "72px";
-    // }
-
-    // if (displayData.length > 7) {
-    //   display.style.fontSize = "62px";
-    // }
-    // if ((displayData[0] == 0 || displayData[0] == '-') && (e.target.textContent != '.')) {
-    //   console.log(`Don't execute rest of this function`)
-    // }
-
-    else if (displayData.length < 9) {
-
-     
-
-      if (displayData[0] != 0 && !displayData.includes(".")) {
-      // if (displayData[0] != 0) {
-        displayData.push(e.target.textContent);
-        console.log(`${e.target.textContent} clicked.`);
-        console.log(`Current items in display array: ${displayData}`);
-        displayNumbers(displayData.join(""), display);
-      
-      } if (displayData[0] == 0 && e.target.textContent == '.') {
-        console.log('deez')
-        displayData.push(e.target.textContent);
-        displayNumbers(displayData.join(""), display);
-      } 
-
-      else if (displayData[0] == 0 && e.target.textContent != 0){
-        console.log('cheetos');
-        if (displayData[1] != '.') {
-          displayData.pop();
-        }
-        
-        displayData.push(e.target.textContent);
-        displayNumbers(displayData.join(""), display);
-      } 
-
-      else if (displayData.includes(".") && e.target.textContent != ".") {
+    if (displayData.length < 9) {
+      if (
+        displayData[0] != "-" &&
+        displayData[0] != 0 &&
+        !displayData.includes(".")
+      ) {
         displayData.push(e.target.textContent);
         console.log(`${e.target.textContent} clicked.`);
         console.log(`Current items in display array: ${displayData}`);
         displayNumbers(displayData.join(""), display);
       }
 
-      console.log(`JavaScript is a fun programming language.`);
-      if (displayData[0] == '.'){
+      else if (displayData[0] == "-" && e.target.textContent == ".") {
+        console.log("Minus and decimal is now in the array.");
+        displayData.push(e.target.textContent);
+        displayNumbers(displayData.join(""), display);
+      }
+
+      else if (displayData[0] == "-" && e.target.textContent > 0) {
+        console.log("Minus and number is now in the array.");
+        displayData.push(e.target.textContent);
+        displayNumbers(displayData.join(""), display);
+      }
+
+      else if (displayData[0] == 0 && e.target.textContent != 0) {
+        console.log("cheetos");
+        if (displayData[1] != ".") {
+          displayData.pop();
+        }
+
+        displayData.push(e.target.textContent);
+        displayNumbers(displayData.join(""), display);
+      } else if (displayData.includes(".") && e.target.textContent != ".") {
+        displayData.push(e.target.textContent);
+        console.log(`${e.target.textContent} clicked.`);
+        console.log(`Current items in display array: ${displayData}`);
+        displayNumbers(displayData.join(""), display);
+      }
+
+      console.log(`JavaScript is a powerful programming language.`);
+      
+      if (displayData[0] == ".") {
         displayData.unshift(0);
         displayNumbers(displayData.join(""), display);
       }
     }
-
-    
-
   });
 });
