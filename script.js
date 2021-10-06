@@ -158,6 +158,8 @@ negateFunction.id = "negateBtn";
 functionsContainer.appendChild(negateFunction);
 document.getElementById("negateBtn").addEventListener("click", function () {
   console.log(displayData);
+  let numLength = displayData[0].toString();
+
   if (displayData.length >= 9) {
     display.style.fontSize = "58px";
   } else {
@@ -165,26 +167,27 @@ document.getElementById("negateBtn").addEventListener("click", function () {
   }
  
   if (displayData.length == 0) {
-    console.log(`Deez`);
+    console.log(`Bzkt`);
     displayData[0] = 0;
   }
 
   if (displayData[0] != "-") {
     if (n != null && n.indexOf("-") != -1) {
-      displayData[0] = displayData[0] * -1;
-      let numLength = displayData[0].toString();
-      console.log(numLength);
-      console.log(`Length of numTest: ${numLength.length}`);
       if (numLength > 8) {
+        console.log(`Firing`)
         displayData[0] = displayData[0].toExponential(2);
       }
-
+      displayData[0] = displayData[0] * -1;
+      console.log(numLength);
+      console.log(`Length of numLength: ${numLength.length}`);
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
       display.textContent = `-${display.textContent}`;
+      console.log(`- was unshifted.`)
       console.log(displayData);
     }
+
   } else if (displayData[0] == "-") {
     displayData.shift();
     display.textContent = `${displayData.join("")}`;
