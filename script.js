@@ -123,11 +123,6 @@ calculatorContainer.appendChild(display);
 
 // Display Function
 function displayNumbers(arr, mod) {
-  // if ( arg.length > 8) {
-  //   // display only up to 8 chars
-  //   arg.toExponential();
-  // }
-  // display.textContent = `${displayData.join("")}`;
   mod.textContent = arr;
 }
 
@@ -150,16 +145,9 @@ document.getElementById("clearBtn").addEventListener("click", function () {
     operatorStyles[i].style.color = "#a9a9a9";
     operatorStyles[i].style.backgroundColor = "#545454";
   }
-
-  // functionStyles[0].style.transition = 'color 2s 1s';
-  // functionStyles[0].style.backgroundColor = 'white';
-
   display.textContent = 0;
   displayData = [0];
   n = null;
-
-  // functionStyles[0].style.color = 'white';
-  // functionStyles[0].style.backgroundColor = 'black';
 });
 
 // Negate Function
@@ -169,16 +157,13 @@ negateFunction.textContent = "+/-";
 negateFunction.id = "negateBtn";
 functionsContainer.appendChild(negateFunction);
 document.getElementById("negateBtn").addEventListener("click", function () {
-  // if negative has not already been applied...
-  // set number as negative
   console.log(displayData);
-
   if (displayData.length >= 9) {
     display.style.fontSize = "58px";
   } else {
     display.style.fontSize = "62px";
   }
-
+ 
   if (displayData.length == 0) {
     console.log(`Deez`);
     displayData[0] = 0;
@@ -205,13 +190,6 @@ document.getElementById("negateBtn").addEventListener("click", function () {
     display.textContent = `${displayData.join("")}`;
     console.log(displayData);
   }
-
-  // if (n != null && n.indexOf("-") != -1){
-  //   console.log(`n's negative: ${n}`);
-  //   console.log(displayData[0]);
-  //   displayData[0] = displayData[0] * -1;
-  //   display.textContent = displayData[0]
-  // }
 });
 
 // Percent Function
@@ -221,34 +199,26 @@ percentFunction.textContent = "%";
 percentFunction.id = "percentBtn";
 functionsContainer.appendChild(percentFunction);
 document.getElementById("percentBtn").addEventListener("click", function () {
-  // if % has not already been applied...
-  // set number as decimal
   console.log(displayData);
   if (displayData) {
     displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
     console.log(`After % Value: ${displayData}`);
     let displayScreen = displayData[0];
-    // displayScreen = Number(displayScreen)
-    // console.log(typeof(displayScreen))
     displayScreen = parseFloat(displayScreen);
     console.log(typeof displayScreen);
     console.log(displayScreen);
     displayData[0] = displayScreen;
-
     displayScreen = displayScreen.toString();
 
     if (displayScreen.length > 8) {
       console.log(`Length of displayScreen: ${displayScreen.length}`);
-      // console.log('length of display screen',displayScreen.length)
       displayScreen = displayScreen.toString();
       displayScreen = Number(displayScreen);
       displayData = [displayScreen.toExponential(2)];
       console.log(displayData);
       display.style.fontSize = "62px";
-
       displayNumbers(displayData, display);
     } else {
-      // display.textContent = `${displayData.join("") / 100}`;
       displayNumbers(displayData, display);
     }
 
@@ -278,8 +248,6 @@ document.getElementById("divisionBtn").addEventListener("click", function () {
     operatorStyles[i].style.backgroundColor = "#545454";
   }
   currentOperator = divide;
-  // divisionOperator.style.color = '#545454';
-  // divisionOperator.style.backgroundColor = '#a9a9a9';
   operatorStyles[0].style.color = "#545454";
   operatorStyles[0].style.backgroundColor = "#a9a9a9";
 
@@ -287,7 +255,6 @@ document.getElementById("divisionBtn").addEventListener("click", function () {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    operand1 = parseFloat(operand1.toPrecision(3));
     console.log(`Operand1 value: ${operand1}`);
     displayData = [];
   }
@@ -317,7 +284,6 @@ document.getElementById("multiplyBtn").addEventListener("click", function () {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    // operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
   }
 });
@@ -346,7 +312,6 @@ document.getElementById("differenceBtn").addEventListener("click", function () {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
   }
 });
@@ -373,7 +338,6 @@ document.getElementById("sumBtn").addEventListener("click", function () {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
   }
 });
@@ -447,10 +411,6 @@ numbersArray.forEach((e) => {
         console.log("Minus and number is now in the array.");
         displayData.push(e.target.textContent);
         displayNumbers(displayData.join(""), display);
-        if (displayData[1] == 0){
-          // displayData.splice(1);
-          // console.log(`${displayData.splice(1)} removed.`)
-        }
       }
 
       else if (displayData[0] == 0 && e.target.textContent != 0) {
