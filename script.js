@@ -317,7 +317,7 @@ document.getElementById("multiplyBtn").addEventListener("click", function () {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    operand1 = parseFloat(operand1.toPrecision(3));
+    // operand1 = parseFloat(operand1.toPrecision(3));
     displayData = [];
   }
 });
@@ -440,9 +440,17 @@ numbersArray.forEach((e) => {
       }
 
       else if (displayData[0] == "-" && e.target.textContent > 0) {
+        if (displayData[1] == 0){
+          displayData.splice(1,1);
+          console.log(`${displayData.splice(1,1)} removed.`)
+        }
         console.log("Minus and number is now in the array.");
         displayData.push(e.target.textContent);
         displayNumbers(displayData.join(""), display);
+        if (displayData[1] == 0){
+          // displayData.splice(1);
+          // console.log(`${displayData.splice(1)} removed.`)
+        }
       }
 
       else if (displayData[0] == 0 && e.target.textContent != 0) {
