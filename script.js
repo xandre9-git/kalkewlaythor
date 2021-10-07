@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 // GLOBALS
 
 let displayData = ["0"];
@@ -9,6 +11,72 @@ let currentOperator = null;
 let n = null;
 let operatorStyles = document.getElementsByClassName("operators");
 let functionStyles = document.getElementsByClassName("functions");
+
+let keyPressed = function(e){
+  console.log(`${e.key} was pressed.`)
+  e.target.textContent = e.key;
+  return e.target.textContent;
+}
+
+let numberInputs = function (e) {
+  if (n != null) {
+    displayData = [];
+    n = null;
+  }
+
+  if (displayData.length < 9) {
+    if (
+      displayData[0] != "-" &&
+      displayData[0] != 0 &&
+      !displayData.includes(".")
+    ) {
+      displayData.push(e.target.textContent);
+      console.log(`${e.target.textContent} clicked.`);
+      console.log(`Current items in display array: ${displayData}`);
+      displayNumbers(displayData.join(""), display);
+    }
+
+    else if (displayData[0] == "-" && e.target.textContent == ".") {
+      console.log("Minus and decimal is now in the array.");
+      displayData.push(e.target.textContent);
+      displayNumbers(displayData.join(""), display);
+    }
+
+    else if (displayData[0] == "-" && e.target.textContent > 0) {
+      if (displayData[1] == 0){
+        displayData.splice(1,1);
+        console.log(`${displayData.splice(1,1)} removed.`)
+      }
+      console.log("Minus and number is now in the array.");
+      displayData.push(e.target.textContent);
+      displayNumbers(displayData.join(""), display);
+    }
+
+    else if (displayData[0] == 0 && e.target.textContent != 0) {
+      console.log("cheetos");
+      if (displayData[1] != ".") {
+        displayData.pop();
+      }
+
+      displayData.push(e.target.textContent);
+      displayNumbers(displayData.join(""), display);
+    } else if (displayData.includes(".") && e.target.textContent != ".") {
+      displayData.push(e.target.textContent);
+      console.log(`${e.target.textContent} clicked.`);
+      console.log(`Current items in display array: ${displayData}`);
+      displayNumbers(displayData.join(""), display);
+    }
+
+    console.log(`JavaScript is a powerful programming language.`);
+    
+    if (displayData[0] == ".") {
+      displayData.unshift(0);
+      displayNumbers(displayData.join(""), display);
+    }
+  }
+}
+
+window.addEventListener('keydown', keyPressed);
 
 // OPERATORS
 
@@ -186,10 +254,6 @@ document.getElementById("negateBtn").addEventListener("click", function () {
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
-      // if (numLength.length >= 8) {
-      //   console.log(`Firing`)
-      //   // displayData[0] = displayData[0].toExponential(2);
-      // }
       display.textContent = `-${display.textContent}`;
       console.log(`- was unshifted.`)
       console.log(displayData);
@@ -389,61 +453,6 @@ for (let i = 9; i >= 1; i--) {
 const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
-  e.addEventListener("click", function (e) {
-    if (n != null) {
-      displayData = [];
-      n = null;
-    }
-
-    if (displayData.length < 9) {
-      if (
-        displayData[0] != "-" &&
-        displayData[0] != 0 &&
-        !displayData.includes(".")
-      ) {
-        displayData.push(e.target.textContent);
-        console.log(`${e.target.textContent} clicked.`);
-        console.log(`Current items in display array: ${displayData}`);
-        displayNumbers(displayData.join(""), display);
-      }
-
-      else if (displayData[0] == "-" && e.target.textContent == ".") {
-        console.log("Minus and decimal is now in the array.");
-        displayData.push(e.target.textContent);
-        displayNumbers(displayData.join(""), display);
-      }
-
-      else if (displayData[0] == "-" && e.target.textContent > 0) {
-        if (displayData[1] == 0){
-          displayData.splice(1,1);
-          console.log(`${displayData.splice(1,1)} removed.`)
-        }
-        console.log("Minus and number is now in the array.");
-        displayData.push(e.target.textContent);
-        displayNumbers(displayData.join(""), display);
-      }
-
-      else if (displayData[0] == 0 && e.target.textContent != 0) {
-        console.log("cheetos");
-        if (displayData[1] != ".") {
-          displayData.pop();
-        }
-
-        displayData.push(e.target.textContent);
-        displayNumbers(displayData.join(""), display);
-      } else if (displayData.includes(".") && e.target.textContent != ".") {
-        displayData.push(e.target.textContent);
-        console.log(`${e.target.textContent} clicked.`);
-        console.log(`Current items in display array: ${displayData}`);
-        displayNumbers(displayData.join(""), display);
-      }
-
-      console.log(`JavaScript is a powerful programming language.`);
-      
-      if (displayData[0] == ".") {
-        displayData.unshift(0);
-        displayNumbers(displayData.join(""), display);
-      }
-    }
-  });
+  e.addEventListener("click", numberInputs);
+  // e.addEventListener("keydown", numberInputs(keyPressed))
 });
