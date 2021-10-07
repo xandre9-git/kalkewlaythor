@@ -148,6 +148,8 @@ document.getElementById("clearBtn").addEventListener("click", function () {
   display.textContent = 0;
   displayData = [0];
   n = null;
+  operand1 = null;
+  operand2 = null;
 });
 
 // Negate Function
@@ -159,8 +161,9 @@ functionsContainer.appendChild(negateFunction);
 document.getElementById("negateBtn").addEventListener("click", function () {
   console.log(displayData);
   let numLength = displayData[0].toString();
+  console.log(`At start length of displayData[0] is ${numLength.length}`)
 
-  if (displayData.length >= 9) {
+  if (displayData.length >= 9 || displayData[0].toString().length >= 9) {
     display.style.fontSize = "58px";
   } else {
     display.style.fontSize = "62px";
@@ -173,16 +176,20 @@ document.getElementById("negateBtn").addEventListener("click", function () {
 
   if (displayData[0] != "-") {
     if (n != null && n.indexOf("-") != -1) {
-      if (numLength > 8) {
-        console.log(`Firing`)
-        displayData[0] = displayData[0].toExponential(2);
-      }
       displayData[0] = displayData[0] * -1;
       console.log(numLength);
       console.log(`Length of numLength: ${numLength.length}`);
+      if (numLength.length >= 7) {
+        console.log(`Firing`)
+        displayData[0] = displayData[0].toExponential(2);
+      }
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
+      // if (numLength.length >= 8) {
+      //   console.log(`Firing`)
+      //   // displayData[0] = displayData[0].toExponential(2);
+      // }
       display.textContent = `-${display.textContent}`;
       console.log(`- was unshifted.`)
       console.log(displayData);
