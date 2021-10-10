@@ -21,11 +21,47 @@ let keyPressed = function(e){
   }
 }
 
-let minusPressed = function(e){
+let shiftMinusPressed = function(e){
   // console.log(`${e.key} was pressed.`)
-  if (e.key === '-') {
+  if (e.shiftKey && e.key === '-') {
     // console.log(`The c key was pressed.`)
     negateIt();
+  }
+}
+
+let percentPressed = function(e) {
+  if (e.shiftKey && e.key == '%'){
+    percentIt();
+  }
+}
+
+let plusPressed = function(e) {
+  if (e.shiftKey && e.key == '+' || e.key == '+'){
+    addIt();
+  }
+}
+
+let slashPressed = function(e) {
+  if (e.key == '/'){
+    divideIt();
+  }
+}
+
+let asteriskPressed = function(e) {
+  if (e.shiftKey && e.key == '*' || e.key == '*'){
+    multiplyIt()
+  }
+}
+
+let minusPressed = function(e) {
+  if (e.key == '-'){
+    subtractIt();
+  }
+}
+
+let equalPressed = function(e) {
+  if (e.key == '=' || e.key == 'Enter') {
+    equal();
   }
 }
 
@@ -70,6 +106,119 @@ let negateIt = function () {
     console.log(displayData);
   }
 }
+
+let percentIt = function () {
+  console.log(displayData);
+  if (displayData) {
+    displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
+    console.log(`After % Value: ${displayData}`);
+    let displayScreen = displayData[0];
+    displayScreen = parseFloat(displayScreen);
+    console.log(typeof displayScreen);
+    console.log(displayScreen);
+    displayData[0] = displayScreen;
+    displayScreen = displayScreen.toString();
+
+    if (displayScreen.length > 8) {
+      console.log(`Length of displayScreen: ${displayScreen.length}`);
+      displayScreen = displayScreen.toString();
+      displayScreen = Number(displayScreen);
+      displayData = [displayScreen.toExponential(2)];
+      console.log(displayData);
+      display.style.fontSize = "62px";
+      displayNumbers(displayData, display);
+    } else {
+      displayNumbers(displayData, display);
+    }
+
+    console.log(displayData);
+  }
+}
+
+let addIt = function () {
+  if (operand1 != null) {
+    equal();
+  }
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
+  }
+
+  currentOperator = add;
+  additionOperator.style.color = "#545454";
+  additionOperator.style.backgroundColor = "#a9a9a9";
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    displayData = [];
+  }
+}
+
+let divideIt = function () {
+  if (operand1 != null) {
+    equal();
+  }
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
+  }
+  currentOperator = divide;
+  operatorStyles[0].style.color = "#545454";
+  operatorStyles[0].style.backgroundColor = "#a9a9a9";
+
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    console.log(`Operand1 value: ${operand1}`);
+    displayData = [];
+  }
+}
+
+let multiplyIt = function () {
+  if (operand1 != null) {
+    equal();
+    console.log(`Equal() fired.`);
+  }
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
+  }
+  currentOperator = multiply;
+  operatorStyles[1].style.color = "#545454";
+  operatorStyles[1].style.backgroundColor = "#a9a9a9";
+  console.log(`× clicked.`);
+  console.log(displayData.length);
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    displayData = [];
+  }
+}
+
+let subtractIt = function () {
+  console.log(`Operand 1's value: ${operand1}`);
+
+  if (operand1 != null) {
+    equal();
+  }
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
+  }
+
+  currentOperator = subtract;
+  subtractionOperator.style.color = "#545454";
+  subtractionOperator.style.backgroundColor = "#a9a9a9";
+  if (displayData.length > 0) {
+    displayNumbers(displayData.join(""), display);
+    let operandStr = `${displayData.join("")}`;
+    operand1 = parseFloat(operandStr);
+    displayData = [];
+  }
+};
 
 let numberInputs = function (e) {
 
@@ -160,7 +309,13 @@ let clearIt = function () {
 }
 
 window.addEventListener('keydown', keyPressed);
+window.addEventListener('keydown', shiftMinusPressed);
+window.addEventListener('keydown', percentPressed);
+window.addEventListener('keydown', plusPressed);
+window.addEventListener('keydown', slashPressed);
+window.addEventListener('keydown', asteriskPressed);
 window.addEventListener('keydown', minusPressed);
+window.addEventListener('keydown', equalPressed);
 
 // OPERATORS
 
@@ -309,33 +464,7 @@ percentFunction.className = "functions";
 percentFunction.textContent = "%";
 percentFunction.id = "percentBtn";
 functionsContainer.appendChild(percentFunction);
-document.getElementById("percentBtn").addEventListener("click", function () {
-  console.log(displayData);
-  if (displayData) {
-    displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
-    console.log(`After % Value: ${displayData}`);
-    let displayScreen = displayData[0];
-    displayScreen = parseFloat(displayScreen);
-    console.log(typeof displayScreen);
-    console.log(displayScreen);
-    displayData[0] = displayScreen;
-    displayScreen = displayScreen.toString();
-
-    if (displayScreen.length > 8) {
-      console.log(`Length of displayScreen: ${displayScreen.length}`);
-      displayScreen = displayScreen.toString();
-      displayScreen = Number(displayScreen);
-      displayData = [displayScreen.toExponential(2)];
-      console.log(displayData);
-      display.style.fontSize = "62px";
-      displayNumbers(displayData, display);
-    } else {
-      displayNumbers(displayData, display);
-    }
-
-    console.log(displayData);
-  }
-});
+document.getElementById("percentBtn").addEventListener("click", percentIt);
 
 // CALCULATOR OPERATORS
 
@@ -350,26 +479,7 @@ divisionOperator.textContent = "÷";
 divisionOperator.className = "operators";
 divisionOperator.id = "divisionBtn";
 operatorContainer.appendChild(divisionOperator);
-document.getElementById("divisionBtn").addEventListener("click", function () {
-  if (operand1 != null) {
-    equal();
-  }
-  for (let i = 0; i < operatorStyles.length; i++) {
-    operatorStyles[i].style.color = "#a9a9a9";
-    operatorStyles[i].style.backgroundColor = "#545454";
-  }
-  currentOperator = divide;
-  operatorStyles[0].style.color = "#545454";
-  operatorStyles[0].style.backgroundColor = "#a9a9a9";
-
-  if (displayData.length > 0) {
-    displayNumbers(displayData.join(""), display);
-    let operandStr = `${displayData.join("")}`;
-    operand1 = parseFloat(operandStr);
-    console.log(`Operand1 value: ${operand1}`);
-    displayData = [];
-  }
-});
+document.getElementById("divisionBtn").addEventListener("click", divideIt);
 
 // Multiplication Operation
 const multiplicationOperator = document.createElement("div");
@@ -377,27 +487,7 @@ multiplicationOperator.textContent = "×";
 multiplicationOperator.className = "operators";
 multiplicationOperator.id = "multiplyBtn";
 operatorContainer.appendChild(multiplicationOperator);
-document.getElementById("multiplyBtn").addEventListener("click", function () {
-  if (operand1 != null) {
-    equal();
-    console.log(`Equal() fired.`);
-  }
-  for (let i = 0; i < operatorStyles.length; i++) {
-    operatorStyles[i].style.color = "#a9a9a9";
-    operatorStyles[i].style.backgroundColor = "#545454";
-  }
-  currentOperator = multiply;
-  operatorStyles[1].style.color = "#545454";
-  operatorStyles[1].style.backgroundColor = "#a9a9a9";
-  console.log(`× clicked.`);
-  console.log(displayData.length);
-  if (displayData.length > 0) {
-    displayNumbers(displayData.join(""), display);
-    let operandStr = `${displayData.join("")}`;
-    operand1 = parseFloat(operandStr);
-    displayData = [];
-  }
-});
+document.getElementById("multiplyBtn").addEventListener("click", multiplyIt);
 
 // Subtraction Operation
 const subtractionOperator = document.createElement("div");
@@ -405,27 +495,7 @@ subtractionOperator.textContent = "-";
 subtractionOperator.className = "operators";
 subtractionOperator.id = "differenceBtn";
 operatorContainer.appendChild(subtractionOperator);
-document.getElementById("differenceBtn").addEventListener("click", function () {
-  console.log(`Operand 1's value: ${operand1}`);
-
-  if (operand1 != null) {
-    equal();
-  }
-  for (let i = 0; i < operatorStyles.length; i++) {
-    operatorStyles[i].style.color = "#a9a9a9";
-    operatorStyles[i].style.backgroundColor = "#545454";
-  }
-
-  currentOperator = subtract;
-  subtractionOperator.style.color = "#545454";
-  subtractionOperator.style.backgroundColor = "#a9a9a9";
-  if (displayData.length > 0) {
-    displayNumbers(displayData.join(""), display);
-    let operandStr = `${displayData.join("")}`;
-    operand1 = parseFloat(operandStr);
-    displayData = [];
-  }
-});
+document.getElementById("differenceBtn").addEventListener("click", subtractIt);
 
 // Addition Operation
 const additionOperator = document.createElement("div");
@@ -433,25 +503,7 @@ additionOperator.textContent = "+";
 additionOperator.className = "operators";
 additionOperator.id = "sumBtn";
 operatorContainer.appendChild(additionOperator);
-document.getElementById("sumBtn").addEventListener("click", function () {
-  if (operand1 != null) {
-    equal();
-  }
-  for (let i = 0; i < operatorStyles.length; i++) {
-    operatorStyles[i].style.color = "#a9a9a9";
-    operatorStyles[i].style.backgroundColor = "#545454";
-  }
-
-  currentOperator = add;
-  additionOperator.style.color = "#545454";
-  additionOperator.style.backgroundColor = "#a9a9a9";
-  if (displayData.length > 0) {
-    displayNumbers(displayData.join(""), display);
-    let operandStr = `${displayData.join("")}`;
-    operand1 = parseFloat(operandStr);
-    displayData = [];
-  }
-});
+document.getElementById("sumBtn").addEventListener("click", addIt);
 
 // Equals Operation
 function equalOperator(parent) {
