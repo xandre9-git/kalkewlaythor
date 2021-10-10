@@ -11,18 +11,35 @@ let currentOperator = null;
 let n = null;
 let operatorStyles = document.getElementsByClassName("operators");
 let functionStyles = document.getElementsByClassName("functions");
+let numberStyles = document.getElementsByClassName("numbers");
 
 let keyPressed = function(e){
   console.log(`${e.key} was pressed.`)
-  e.target.textContent = e.key;
-  return e.target.textContent;
+  if (e.key === 'c') {
+    console.log(`The c key was pressed.`)
+    clearIt();
+  }
+
+  
 }
 
 let numberInputs = function (e) {
+
+  // let inputPressed = keyPressed;
+  // console.log(inputPressed);
+
   if (n != null) {
     displayData = [];
     n = null;
   }
+ 
+  // for (let i = 0; i < 11; i++){
+  //   if (keyPressed == numberStyles[i].textContent) {
+  //     console.log(numberStyles[i].textContent);
+  //   }
+  // }
+
+
 
   if (displayData.length < 9) {
     if (
@@ -72,8 +89,26 @@ let numberInputs = function (e) {
     if (displayData[0] == ".") {
       displayData.unshift(0);
       displayNumbers(displayData.join(""), display);
-    }
+    }   
+
   }
+
+
+  
+}
+
+let clearIt = function () {
+    for (let i = 0; i < operatorStyles.length; i++) {
+      operatorStyles[i].style.color = "#a9a9a9";
+      operatorStyles[i].style.backgroundColor = "#545454";
+    }
+    display.textContent = 0;
+    displayData = [0];
+    n = null;
+    operand1 = null;
+    operand2 = null;
+  
+
 }
 
 window.addEventListener('keydown', keyPressed);
@@ -208,17 +243,8 @@ function clearFunction(parent) {
   parent.appendChild(clearFunction);
 }
 clearFunction(functionsContainer);
-document.getElementById("clearBtn").addEventListener("click", function () {
-  for (let i = 0; i < operatorStyles.length; i++) {
-    operatorStyles[i].style.color = "#a9a9a9";
-    operatorStyles[i].style.backgroundColor = "#545454";
-  }
-  display.textContent = 0;
-  displayData = [0];
-  n = null;
-  operand1 = null;
-  operand2 = null;
-});
+document.getElementById("clearBtn").addEventListener("click", clearIt);
+document.getElementById("clearBtn").addEventListener("keydown", keyPressed)
 
 // Negate Function
 const negateFunction = document.createElement("div");
@@ -454,5 +480,5 @@ const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
   e.addEventListener("click", numberInputs);
-  // e.addEventListener("keydown", numberInputs(keyPressed))
+  e.addEventListener("keydown", numberInputs);
 });
