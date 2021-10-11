@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 // GLOBALS
 
 let displayData = ["0"];
@@ -13,141 +11,108 @@ let operatorStyles = document.getElementsByClassName("operators");
 let functionStyles = document.getElementsByClassName("functions");
 let numberStyles = document.getElementsByClassName("numbers");
 
-let keyPressed = function(e){
-  // console.log(`${e.key} was pressed.`)
-  if (e.key === 'c') {
-    // console.log(`The c key was pressed.`)
+let keyPressed = function (e) {
+  if (e.key === "c") {
     clearIt();
   }
-}
+};
 
-let shiftMinusPressed = function(e){
-  if (e.shiftKey && e.key == '_') {
-    console.log(`Negate function fired.`)
+let shiftMinusPressed = function (e) {
+  if (e.shiftKey && e.key == "_") {
     negateIt();
   }
-}
+};
 
-let percentPressed = function(e) {
-  if (e.shiftKey && e.key == '%'){
+let percentPressed = function (e) {
+  if (e.shiftKey && e.key == "%") {
     percentIt();
   }
-}
+};
 
-let plusPressed = function(e) {
-  if (e.shiftKey && e.key == '+' || e.key == '+'){
+let plusPressed = function (e) {
+  if ((e.shiftKey && e.key == "+") || e.key == "+") {
     addIt();
   }
-}
+};
 
-let slashPressed = function(e) {
-  if (e.key == '/'){
+let slashPressed = function (e) {
+  if (e.key == "/") {
     divideIt();
   }
-}
+};
 
-let asteriskPressed = function(e) {
-  if (e.shiftKey && e.key == '*' || e.key == '*'){
-    multiplyIt()
+let asteriskPressed = function (e) {
+  if ((e.shiftKey && e.key == "*") || e.key == "*") {
+    multiplyIt();
   }
-}
+};
 
-let minusPressed = function(e) {
-  if (e.key == '-'){
+let minusPressed = function (e) {
+  if (e.key == "-") {
     subtractIt();
   }
-}
+};
 
-let equalPressed = function(e) {
-  if (e.key == '=' || e.key == 'Enter') {
+let equalPressed = function (e) {
+  if (e.key == "=" || e.key == "Enter") {
     equal();
   }
-}
+};
 
- 
-let numberPressed = function(e){
-  for (let i = 0; i < 12; i++){
-  console.log(numberStyles[i].textContent);
-
-  if (e.key == numberStyles[i].textContent) {
-    console.log(numberStyles[i].textContent);
-    console.log(e.key)
-    let numberPressed = numberStyles[i].textContent;
-    console.log(`numberPressed value: ${numberPressed}`);
-    return numberInputs(numberPressed)
+let numberPressed = function (e) {
+  for (let i = 0; i < 12; i++) {
+    if (e.key == numberStyles[i].textContent) {
+      let numberPressed = numberStyles[i].textContent;
+      return numberInputs(numberPressed);
+    }
   }
-}
-}
-
-
+};
 
 let negateIt = function () {
-  console.log(displayData);
   let numLength = displayData[0].toString();
-  console.log(`At start length of displayData[0] is ${numLength.length}`)
-
   if (displayData.length >= 9 || displayData[0].toString().length >= 9) {
     display.style.fontSize = "58px";
   } else {
     display.style.fontSize = "62px";
   }
- 
   if (displayData.length == 0) {
-    console.log(`Bzkt`);
     displayData[0] = 0;
   }
-
   if (displayData[0] != "-") {
     if (n != null && n.indexOf("-") != -1) {
       displayData[0] = displayData[0] * -1;
-      console.log(numLength);
-      console.log(`Length of numLength: ${numLength.length}`);
       if (numLength.length >= 7) {
-        console.log(`Firing`)
         displayData[0] = displayData[0].toExponential(2);
       }
       display.textContent = `${displayData.join("")}`;
     } else if (n > 0 || n == null) {
       displayData.unshift("-");
       display.textContent = `-${display.textContent}`;
-      console.log(`- was unshifted.`)
-      console.log(displayData);
     }
-
   } else if (displayData[0] == "-") {
     displayData.shift();
     display.textContent = `${displayData.join("")}`;
-    console.log(displayData);
   }
-}
+};
 
 let percentIt = function () {
-  console.log(displayData);
   if (displayData) {
     displayData = [`${parseFloat(displayData.join("") / 100).toPrecision(4)}`];
-    console.log(`After % Value: ${displayData}`);
     let displayScreen = displayData[0];
     displayScreen = parseFloat(displayScreen);
-    console.log(typeof displayScreen);
-    console.log(displayScreen);
     displayData[0] = displayScreen;
     displayScreen = displayScreen.toString();
-
     if (displayScreen.length > 8) {
-      console.log(`Length of displayScreen: ${displayScreen.length}`);
       displayScreen = displayScreen.toString();
       displayScreen = Number(displayScreen);
       displayData = [displayScreen.toExponential(2)];
-      console.log(displayData);
       display.style.fontSize = "62px";
       displayNumbers(displayData, display);
     } else {
       displayNumbers(displayData, display);
     }
-
-    console.log(displayData);
   }
-}
+};
 
 let addIt = function () {
   if (operand1 != null) {
@@ -157,7 +122,6 @@ let addIt = function () {
     operatorStyles[i].style.color = "#a9a9a9";
     operatorStyles[i].style.backgroundColor = "#545454";
   }
-
   currentOperator = add;
   additionOperator.style.color = "#545454";
   additionOperator.style.backgroundColor = "#a9a9a9";
@@ -167,7 +131,7 @@ let addIt = function () {
     operand1 = parseFloat(operandStr);
     displayData = [];
   }
-}
+};
 
 let divideIt = function () {
   if (operand1 != null) {
@@ -180,20 +144,17 @@ let divideIt = function () {
   currentOperator = divide;
   operatorStyles[0].style.color = "#545454";
   operatorStyles[0].style.backgroundColor = "#a9a9a9";
-
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
-    console.log(`Operand1 value: ${operand1}`);
     displayData = [];
   }
-}
+};
 
 let multiplyIt = function () {
   if (operand1 != null) {
     equal();
-    console.log(`Equal() fired.`);
   }
   for (let i = 0; i < operatorStyles.length; i++) {
     operatorStyles[i].style.color = "#a9a9a9";
@@ -202,19 +163,15 @@ let multiplyIt = function () {
   currentOperator = multiply;
   operatorStyles[1].style.color = "#545454";
   operatorStyles[1].style.backgroundColor = "#a9a9a9";
-  console.log(`× clicked.`);
-  console.log(displayData.length);
   if (displayData.length > 0) {
     displayNumbers(displayData.join(""), display);
     let operandStr = `${displayData.join("")}`;
     operand1 = parseFloat(operandStr);
     displayData = [];
   }
-}
+};
 
 let subtractIt = function () {
-  console.log(`Operand 1's value: ${operand1}`);
-
   if (operand1 != null) {
     equal();
   }
@@ -222,7 +179,6 @@ let subtractIt = function () {
     operatorStyles[i].style.color = "#a9a9a9";
     operatorStyles[i].style.backgroundColor = "#545454";
   }
-
   currentOperator = subtract;
   subtractionOperator.style.color = "#545454";
   subtractionOperator.style.backgroundColor = "#a9a9a9";
@@ -235,24 +191,16 @@ let subtractIt = function () {
 };
 
 let numberInputs = function (e) {
-
-
   if (n != null) {
     displayData = [];
     n = null;
   }
-
   let displayedNumber;
-
-  if (e >= 0 || e == '.') {
-    displayedNumber = e
+  if (e >= 0 || e == ".") {
+    displayedNumber = e;
   } else {
     displayedNumber = e.target.textContent;
   }
-
-
-
-
   if (displayData.length < 9) {
     if (
       displayData[0] != "-" &&
@@ -260,83 +208,62 @@ let numberInputs = function (e) {
       !displayData.includes(".")
     ) {
       displayData.push(displayedNumber);
-      console.log(`${displayedNumber} clicked.`);
-      console.log(`Current items in display array: ${displayData}`);
       displayNumbers(displayData.join(""), display);
-    }
-
-    else if (displayData[0] == "-" && displayedNumber == ".") {
-      console.log("Minus and decimal is now in the array.");
+    } else if (displayData[0] == "-" && displayedNumber == ".") {
       displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
-    }
-
-    else if (displayData[0] == "-" && displayedNumber > 0) {
-      if (displayData[1] == 0){
-        displayData.splice(1,1);
-        console.log(`${displayData.splice(1,1)} removed.`)
+    } else if (displayData[0] == "-" && displayedNumber > 0) {
+      if (displayData[1] == 0) {
+        displayData.splice(1, 1);
       }
-      console.log("Minus and number is now in the array.");
       displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
-    }
-
-    else if (displayData[0] == 0 && displayedNumber != 0) {
-      console.log("cheetos");
+    } else if (displayData[0] == 0 && displayedNumber != 0) {
       if (displayData[1] != ".") {
         displayData.pop();
       }
-
       displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
     } else if (displayData.includes(".") && displayedNumber != ".") {
       displayData.push(displayedNumber);
-      console.log(`${displayedNumber} clicked.`);
-      console.log(`Current items in display array: ${displayData}`);
       displayNumbers(displayData.join(""), display);
     }
-
-    console.log(`JavaScript is a powerful programming language.`);
-    
     if (displayData[0] == ".") {
       displayData.unshift(0);
       displayNumbers(displayData.join(""), display);
-    }   
-
+    }
   }
-
-
-  
-}
+};
 
 let clearIt = function () {
-    for (let i = 0; i < operatorStyles.length; i++) {
-      operatorStyles[i].style.color = "#a9a9a9";
-      operatorStyles[i].style.backgroundColor = "#545454";
-    }
-    display.textContent = 0;
-    displayData = [0];
-    n = null;
-    operand1 = null;
-    operand2 = null;
-  
+  for (let i = 0; i < operatorStyles.length; i++) {
+    operatorStyles[i].style.color = "#a9a9a9";
+    operatorStyles[i].style.backgroundColor = "#545454";
+  }
+  display.textContent = 0;
+  displayData = [0];
+  n = null;
+  operand1 = null;
+  operand2 = null;
+};
 
-}
+// Window Event Listeners
 
-window.addEventListener('keydown', keyPressed);
-window.addEventListener('keydown', shiftMinusPressed);
-window.addEventListener('keydown', percentPressed);
-window.addEventListener('keydown', plusPressed);
-window.addEventListener('keydown', slashPressed);
-window.addEventListener('keydown', asteriskPressed);
-window.addEventListener('keydown', minusPressed);
-window.addEventListener('keydown', equalPressed);
-window.addEventListener('keydown', numberPressed);
+window.addEventListener("keydown", keyPressed);
+window.addEventListener("keydown", shiftMinusPressed);
+window.addEventListener("keydown", percentPressed);
+window.addEventListener("keydown", plusPressed);
+window.addEventListener("keydown", slashPressed);
+window.addEventListener("keydown", asteriskPressed);
+window.addEventListener("keydown", minusPressed);
+window.addEventListener("keydown", equalPressed);
+window.addEventListener("keydown", numberPressed);
 
 // OPERATORS
 
 // Add Function
-function add(x, y) {1
+function add(x, y) {
+  1;
   return x + y;
 }
 
@@ -353,7 +280,7 @@ function multiply(x, y) {
 // Divide Function
 function divide(x, y) {
   if (y == 0) {
-    return "What you talkin' 'bout, Willis?";
+    return "Error";
   } else {
     return x / y;
   }
@@ -365,46 +292,26 @@ function equal() {
     operatorStyles[i].style.color = "#a9a9a9";
     operatorStyles[i].style.backgroundColor = "#545454";
   }
-
-  console.log(`Equal() displayData values: ${displayData}`);
-
   if (operand1 != null && displayData.length > 0) {
     let operandStr = `${displayData.join("")}`;
-    console.log(`operandStr value: ${operandStr}`);
     operand2 = parseFloat(operandStr);
     operand2 = parseFloat(operand2.toPrecision(3));
-    console.table(operand1, operand2);
-    console.log(typeof operand1);
-    console.log(typeof operand2);
-    console.log(currentOperator);
-    console.log(operate(currentOperator, operand1, operand2));
     let res = operate(currentOperator, operand1, operand2);
-    console.log(res);
-
     if (typeof res == "number") {
       res = res.toPrecision(8);
-      console.log(res);
-      console.log(`res type: ${typeof res}`);
       n = parseFloat(res);
       n = n.toString();
-
       if (n.length > 9) {
         n = Number(n);
         n = n.toExponential(2);
       }
-
-      console.log(typeof n);
-      console.log("this is n", n);
       display.textContent = n;
-
       if (display.textContent.length > 8) {
         display.style.fontSize = "62px";
       }
-
       displayData = [n];
       operand1 = null;
       operand2 = null;
-      console.log(displayData);
       return n;
     } else {
       return (display.textContent = res);
@@ -415,7 +322,7 @@ function equal() {
 // Operate Function
 function operate(func, num1, num2) {
   if (typeof func(num1, num2) == "string") {
-    return `bruh`;
+    return `Error`;
   } else {
     return func(num1, num2);
   }
@@ -464,7 +371,6 @@ function clearFunction(parent) {
 }
 clearFunction(functionsContainer);
 document.getElementById("clearBtn").addEventListener("click", clearIt);
-// document.getElementById("clearBtn").addEventListener("keydown", keyPressed)
 
 // Negate Function
 const negateFunction = document.createElement("div");
@@ -559,5 +465,4 @@ const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
   e.addEventListener("click", numberInputs);
-
 });
