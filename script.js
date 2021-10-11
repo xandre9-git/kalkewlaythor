@@ -22,9 +22,8 @@ let keyPressed = function(e){
 }
 
 let shiftMinusPressed = function(e){
-  // console.log(`${e.key} was pressed.`)
-  if (e.shiftKey && e.key === '-') {
-    // console.log(`The c key was pressed.`)
+  if (e.shiftKey && e.key == '_') {
+    console.log(`Negate function fired.`)
     negateIt();
   }
 }
@@ -63,6 +62,21 @@ let equalPressed = function(e) {
   if (e.key == '=' || e.key == 'Enter') {
     equal();
   }
+}
+
+ 
+let numberPressed = function(e){
+  for (let i = 0; i < 12; i++){
+  console.log(numberStyles[i].textContent);
+
+  if (e.key == numberStyles[i].textContent) {
+    console.log(numberStyles[i].textContent);
+    console.log(e.key)
+    let numberPressed = numberStyles[i].textContent;
+    console.log(`numberPressed value: ${numberPressed}`);
+    return numberInputs(numberPressed)
+  }
+}
 }
 
 
@@ -222,19 +236,20 @@ let subtractIt = function () {
 
 let numberInputs = function (e) {
 
-  // let inputPressed = keyPressed;
-  // console.log(inputPressed);
 
   if (n != null) {
     displayData = [];
     n = null;
   }
- 
-  // for (let i = 0; i < 11; i++){
-  //   if (keyPressed == numberStyles[i].textContent) {
-  //     console.log(numberStyles[i].textContent);
-  //   }
-  // }
+
+  let displayedNumber;
+
+  if (e >= 0 || e == '.') {
+    displayedNumber = e
+  } else {
+    displayedNumber = e.target.textContent;
+  }
+
 
 
 
@@ -244,39 +259,39 @@ let numberInputs = function (e) {
       displayData[0] != 0 &&
       !displayData.includes(".")
     ) {
-      displayData.push(e.target.textContent);
-      console.log(`${e.target.textContent} clicked.`);
+      displayData.push(displayedNumber);
+      console.log(`${displayedNumber} clicked.`);
       console.log(`Current items in display array: ${displayData}`);
       displayNumbers(displayData.join(""), display);
     }
 
-    else if (displayData[0] == "-" && e.target.textContent == ".") {
+    else if (displayData[0] == "-" && displayedNumber == ".") {
       console.log("Minus and decimal is now in the array.");
-      displayData.push(e.target.textContent);
+      displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
     }
 
-    else if (displayData[0] == "-" && e.target.textContent > 0) {
+    else if (displayData[0] == "-" && displayedNumber > 0) {
       if (displayData[1] == 0){
         displayData.splice(1,1);
         console.log(`${displayData.splice(1,1)} removed.`)
       }
       console.log("Minus and number is now in the array.");
-      displayData.push(e.target.textContent);
+      displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
     }
 
-    else if (displayData[0] == 0 && e.target.textContent != 0) {
+    else if (displayData[0] == 0 && displayedNumber != 0) {
       console.log("cheetos");
       if (displayData[1] != ".") {
         displayData.pop();
       }
 
-      displayData.push(e.target.textContent);
+      displayData.push(displayedNumber);
       displayNumbers(displayData.join(""), display);
-    } else if (displayData.includes(".") && e.target.textContent != ".") {
-      displayData.push(e.target.textContent);
-      console.log(`${e.target.textContent} clicked.`);
+    } else if (displayData.includes(".") && displayedNumber != ".") {
+      displayData.push(displayedNumber);
+      console.log(`${displayedNumber} clicked.`);
       console.log(`Current items in display array: ${displayData}`);
       displayNumbers(displayData.join(""), display);
     }
@@ -316,11 +331,12 @@ window.addEventListener('keydown', slashPressed);
 window.addEventListener('keydown', asteriskPressed);
 window.addEventListener('keydown', minusPressed);
 window.addEventListener('keydown', equalPressed);
+window.addEventListener('keydown', numberPressed);
 
 // OPERATORS
 
 // Add Function
-function add(x, y) {
+function add(x, y) {1
   return x + y;
 }
 
@@ -543,5 +559,5 @@ const numberBtns = document.querySelectorAll(".numbers");
 const numbersArray = Array.from(numberBtns);
 numbersArray.forEach((e) => {
   e.addEventListener("click", numberInputs);
-  e.addEventListener("keydown", numberInputs);
+
 });
