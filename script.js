@@ -280,7 +280,7 @@ function multiply(x, y) {
 // Divide Function
 function divide(x, y) {
   if (y == 0) {
-    return "Error";
+    return "bruh";
   } else {
     return x / y;
   }
